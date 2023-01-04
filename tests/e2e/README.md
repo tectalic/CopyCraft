@@ -242,16 +242,17 @@ describe.skip( 'Store owner can go through store Setup Wizard', () => {}
 
 ### How to run tests using custom WordPress, PHP and MariaDB versions
 
-The following variables can be used to specify the versions of WordPress, PHP and MariaDB that you'd like to use to built your test site with Docker:
+The following variables can be used to specify the versions of WordPress, WooCommerce, PHP and MariaDB that you'd like to use to built your test site with Docker:
 
 - `WP_VERSION`
+- `WC_VERSION`
 - `TRAVIS_PHP_VERSION`
-- `TRAVIS_MARIADB_VERSION`  
+- `TRAVIS_MARIADB_VERSION`
 
 The full command to build the site will look as follows:
 
 ```
-TRAVIS_MARIADB_VERSION=10.5.3 TRAVIS_PHP_VERSION=7.4.5 WP_VERSION=5.4.1 npm run docker:up
+TRAVIS_MARIADB_VERSION=10.5.3 TRAVIS_PHP_VERSION=7.4.5 WP_VERSION=5.4.1 WC_VERSION=7.0.0 npm run docker:up
 ```
 
 ## Guide for writing e2e tests

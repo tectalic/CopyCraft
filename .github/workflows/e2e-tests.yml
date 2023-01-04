@@ -12,12 +12,14 @@ jobs:
         wordpress:
           - '6.1.0'
         woocommerce:
-          - '7.2.2' # TODO
+          - '5.9.0'
+          - '7.2.0'
+          - 'latest'
         php:
           - '7.4'
           - '8.0'
 
-    name: E2E Tests - WC ${{ matrix.woocommerce }} | WP ${{ matrix.wordpress }} | PHP ${{ matrix.php }}
+    name: E2E - WC ${{ matrix.woocommerce }} | WP ${{ matrix.wordpress }} | PHP ${{ matrix.php }}
 
     steps:
       - name: Checkout CopyCraft repository
@@ -35,13 +37,13 @@ jobs:
 
       - name: Kill process running on port 8084
         shell: bash
-        run : |
+        run: |
           echo "::group::Kill webserver running on port 8084"
           sudo fuser -k -n tcp 8084
           echo "::endgroup::"
 
       - name: Prepare to Run E2E Tests
-        run: TRAVIS_PHP_VERSION=${{ matrix.php }} WP_VERSION=${{ matrix.wordpress }} npm run docker:up
+        run: PHP_VERSION=${{ matrix.php }} WP_VERSION=${{ matrix.wordpress }} WC_VERSION=${{ matrix.woocommerce }} npm run docker:up
 
       - name: Run E2E Tests
         run: npm run test:e2e
