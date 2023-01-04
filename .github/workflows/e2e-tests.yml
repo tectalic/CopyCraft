@@ -23,22 +23,14 @@ jobs:
       - name: Checkout CopyCraft repository
         uses: actions/checkout@v2
 
-      - name: Setup NodeJS
-        uses: actions/setup-node@v2
+      - name: Setup NodeJS and Cache Dependencies
+        uses: actions/setup-node@v3
         with:
+          cache: 'npm'
           node-version-file: '.nvmrc'
-
-      # Cache node dependencies
-      - name: Cache node dependencies
-        id: node-cache
-        uses: actions/cache@v2
-        with:
-          path: ./node_modules
-          key: ${{ runner.os }}-node-modules-${{ hashFiles('package-lock.json') }}
 
       # Install node dependencies if not present on cache
       - name: Install node dependencies
-        if: ${{ steps.node-cache.outputs.cache-hit == false }}
         run: npm ci
 
       - name: Kill process running on port 8084
