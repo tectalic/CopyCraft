@@ -3,8 +3,6 @@
  */
 import {merchant} from "@woocommerce/e2e-utils";
 
-const TIMEOUT = 20000;
-
 describe('Store Owner Product Management', () => {
 	it('Can create a new draft product', async () => {
 		await merchant.openNewProduct();
