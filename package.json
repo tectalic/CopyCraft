@@ -1,13 +1,18 @@
-
 {
   "name": "copycraft",
   "version": "0.1.0",
   "main": "Gruntfile.js",
   "author": "OM4 Software",
-  "scripts" : {
-    "start" : "grunt default" ,
-    "readme" : "grunt readme",
-    "i18n" : "grunt i18n"
+  "scripts": {
+    "docker:down": "npx wc-e2e docker:down",
+    "docker:ssh": "npx wc-e2e docker:ssh",
+    "docker:up": "npx wc-e2e docker:up",
+    "i18n": "grunt i18n",
+    "readme": "grunt readme",
+    "start": "grunt default",
+    "test:e2e": "npx wc-e2e test:e2e",
+    "test:e2e-debug": "npx wc-e2e test:e2e-debug",
+    "test:e2e-dev": "npx wc-e2e test:e2e-dev"
   },
   "devDependencies": {
     "grunt": "~0.4.5",

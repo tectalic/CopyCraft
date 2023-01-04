@@ -38,7 +38,7 @@ wp plugin install https://github.com/WP-API/basic-auth/archive/master.zip --acti
 # install the WP Mail Logging plugin to test emails
 wp plugin install wp-mail-logging --activate
 
-# echo "Activate <your-extension>"
-# wp plugin activate your-extension
+echo "Activate CopyCraft Plugin"
+wp plugin activate copycraft
 
 echo "Success! Your E2E Test Environment is now ready."
