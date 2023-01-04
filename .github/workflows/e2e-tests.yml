@@ -14,7 +14,7 @@ jobs:
         woocommerce:
           - '7.2.2' # TODO
         php:
-          #          - '7.4'
+          - '7.4'
           - '8.0'
 
     name: E2E Tests - WC ${{ matrix.woocommerce }} | WP ${{ matrix.wordpress }} | PHP ${{ matrix.php }}
@@ -45,3 +45,7 @@ jobs:
 
       - name: Run E2E Tests
         run: npm run test:e2e
+
+      - name: After E2E Tests
+        if: always()
+        run: npm run docker:down
