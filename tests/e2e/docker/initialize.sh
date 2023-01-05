@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # If $WC_VERSION is not defined or is set to "latest", then download latest version. Else download the version specified.
-if [ -z "$WC_VERSION" ] || [ "$WC_VERSION" = "latest" ]; then
+if [ -z "$WC_VERSION" ] || [ "$WC_VERSION" == "latest" ]; then
 	echo "Installing and activating latest WooCommerce version ..."
 	wp plugin install woocommerce --activate
 else
