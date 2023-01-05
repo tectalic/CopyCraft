@@ -3,13 +3,14 @@
 .DS_Store
 .editorconfig
 .git
-.git
 .gitignore
 *~
 /node_modules
 /vendor
+bin
 composer.json
 composer.lock
 Gruntfile.js
+node_modules
 package-lock.json
 package.json
