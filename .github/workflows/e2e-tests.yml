@@ -43,10 +43,7 @@ jobs:
           echo "::endgroup::"
 
       - name: Prepare to Run E2E Tests
-        run: |
-          PHP_VERSION=${{ matrix.php }} WP_VERSION=${{ matrix.wordpress }} WC_VERSION=${{ matrix.woocommerce }} npm run docker:up
-          echo "Waiting 30 seconds for initialize.sh script to complete..."
-          sleep 30
+        run: PHP_VERSION=${{ matrix.php }} WP_VERSION=${{ matrix.wordpress }} WC_VERSION=${{ matrix.woocommerce }} npm run docker:up
 
       - name: Run E2E Tests
         run: npm run test:e2e

@@ -29,7 +29,6 @@ wp option set woocommerce_store_postcode "94110"
 wp option set woocommerce_currency "USD"
 wp option set woocommerce_product_type "both"
 wp option set woocommerce_allow_tracking "no"
-wp rewrite structure /%postname%/
 
 echo "Importing WooCommerce shop pages..."
 wp wc --user=admin tool run install_pages
@@ -48,5 +47,8 @@ wp plugin install wp-mail-logging --activate
 
 echo "Activate CopyCraft Plugin"
 wp plugin activate copycraft
+
+# Create "Ready" page so that node_modules/@woocommerce/e2e-environment/bin/wait-for-build.sh script can check if the site is ready.
+wp post create --post_type=page --post_title='Ready'
 
 echo "Success! Your E2E Test Environment is now ready."
