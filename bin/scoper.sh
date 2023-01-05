@@ -20,7 +20,7 @@ done
 mv "$current"/includes/Vendor/Http/Message/Factory/* "$current"/includes/Vendor/Http/Message/
 rmdir "$current"/includes/Vendor/Http/Message/Factory
 
-# Special hamdle of psr/http-factory independently
+# Special handling of psr/http-factory independently
 php-scoper add-prefix \
   --no-config \
   --force \

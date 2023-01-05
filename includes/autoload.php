@@ -1,6 +1,6 @@
 <?php
 
-// defined( 'ABSPATH' ) || exit;
+defined( 'ABSPATH' ) || exit;
 
 /**
  * Autoload the OM4\CopyCraft namespaced classes.
