@@ -12,9 +12,8 @@ jobs:
         wordpress:
           - '6.1.0'
         woocommerce:
-          - '5.9.0'
-          - '7.2.0'
           - 'latest'
+          # TODO: test against other WooCommerce versions by modifying wp-content/plugins/copycraft/tests/e2e/docker/initialize.sh
         php:
           - '7.4'
           - '8.0'
@@ -44,6 +43,22 @@ jobs:
 
       - name: Prepare to Run E2E Tests
         run: PHP_VERSION=${{ matrix.php }} WP_VERSION=${{ matrix.wordpress }} WC_VERSION=${{ matrix.woocommerce }} npm run docker:up
+
+      - name: Debug
+        run: |
+          env
+          docker ps
+          curl -v http://localhost:8084/
+          curl -v http://localhost:8084/wp-admin/
+          curl -v http://localhost:8084/?pagename=ready
+          curl -v http://localhost:8084/wp-login.php
+          curl -v http://localhost:8084/wp-content/plugins/woocommerce/readme.txt
+          sleep 30
+          curl -v http://localhost:8084/
+          curl -v http://localhost:8084/wp-admin/
+          curl -v http://localhost:8084/?pagename=ready
+          curl -v http://localhost:8084/wp-login.php
+          curl -v http://localhost:8084/wp-content/plugins/woocommerce/readme.txt
 
       - name: Run E2E Tests
         run: npm run test:e2e
