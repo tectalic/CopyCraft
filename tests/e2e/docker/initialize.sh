@@ -43,6 +43,6 @@ echo "Activate CopyCraft Plugin"
 wp plugin activate copycraft
 
 # Create "Ready" page so that node_modules/@woocommerce/e2e-environment/bin/wait-for-build.sh script can check if the site is ready.
-wp post create --post_type=page --post_title='Ready'
+wp post create --post_type=page --post_status=publish --post_title='Ready'
 
 echo "Success! Your E2E Test Environment is now ready."

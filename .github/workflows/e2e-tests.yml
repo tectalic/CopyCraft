@@ -47,6 +47,7 @@ jobs:
           docker ps
           echo "Sleeping for 60 seconds to ensure containers are up and running..."
           sleep 60
+          docker ps
           curl -v "http://localhost:8084/"
           curl -v "http://localhost:8084/?pagename=ready"
 
