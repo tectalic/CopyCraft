@@ -13,3 +13,5 @@
  */
 
 // Your code starts here.
+
+require_once 'includes/autoload.php';
