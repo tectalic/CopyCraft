@@ -7,7 +7,32 @@
   },
   "autoload": {
     "psr-4": {
-        "OM4\\CopyCraft\\": "includes/"
+      "OM4\\CopyCraft\\": "includes/"
     }
-}
+  },
+  "require-dev": {
+    "squizlabs/php_codesniffer": "^3.7",
+    "wp-coding-standards/wpcs": "^2.3",
+    "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+    "phpcompatibility/phpcompatibility-wp": "^2.1"
+  },
+  "config": {
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    }
+  },
+  "scripts": {
+    "base-phpcs": "vendor/bin/phpcs -p -s",
+    "test:style": "@test:style:full --report=summary",
+    "test:style:fix": [
+      "vendor/bin/phpcbf -p -s . || true",
+      "@test:style:full"
+    ],
+    "test:style:full": "@base-phpcs ."
+  },
+  "scripts-descriptions": {
+    "test:style": "Run `phpcs` with summary output.",
+    "test:style:fix": "Run `phpcbf` and `phpcs` with detailed output.",
+    "test:style:full": "Run `phpcs` with detailed output."
+  }
 }

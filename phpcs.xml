@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+
+<ruleset name="OM4 WordPress" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="./vendor/squizlabs/php_codesniffer/phpcs.xsd">
+  <description>OM4 Coding Standards for WordPress projects</description>
+
+  <!-- Define files to check -->
+  <file>./includes</file>
+  <file>./tests</file>
+  <file>./copycraft.php</file>
+  <exclude-pattern>./node_modules</exclude-pattern>
+  <exclude-pattern>./tests/coverage</exclude-pattern>
+  <exclude-pattern>./vendor</exclude-pattern>
+
+  <!-- command-line config -->
+  <arg name="extensions" value="php" />
+
+  <!-- Include all rules from WordPress standard -->
+  <rule ref="WordPress">
+    <!-- Ignore filename check -->
+    <exclude name="WordPress.Files.FileName" />
+    <exclude-pattern>*/vendor/*</exclude-pattern>
+  </rule>
+
+  <!-- Set supported WP version same as the plugin itself -->
+  <config name="minimum_supported_wp_version" value="4.9" />
+
+  <!-- Set text domain to enable checking -->
+  <rule ref="WordPress.WP.I18n">
+    <properties>
+      <property name="text_domain" type="array">
+        <element value="copycraft" />
+      </property>
+    </properties>
+  </rule>
+
+  <!-- Mark WooCommerce's `wc_clean` as snaitising function -->
+  <rule ref="WordPress.Security.ValidatedSanitizedInput">
+    <properties>
+      <property name="customSanitizingFunctions" type="array">
+        <element value="wc_clean" />
+      </property>
+    </properties>
+  </rule>
+
+  <!-- Ignore short array syntax (part of WordPress standard) for test -->
+  <!-- see: https://github.com/WordPress/WordPress-Coding-Standards/pull/1770 -->
+  <rule ref="Generic.Arrays.DisallowShortArraySyntax.Found">
+    <exclude-pattern>./tests</exclude-pattern>
+  </rule>
+
+  <!-- Fine control alternative function check -->
+  <rule ref="WordPress.WP.AlternativeFunctions">
+    <properties>
+      <property name="exclude" type="array">
+        <element value="json_encode" />
+      </property>
+    </properties>
+    <!-- Do not run this rule on tests -->
+    <exclude-pattern>./tests</exclude-pattern>
+  </rule>
+
+  <!-- Include all rules from phpcompatibility/phpcompatibility-wp -->
+  <rule ref="PHPCompatibilityWP" />
+
+  <!-- Set supported PHP version same as the plugin itself -->
+  <config name="testVersion" value="7.4-" />
+
+  <!-- Include Commenting rules from Generic standard -->
+  <rule ref="Generic.Commenting">
+    <!-- Leave TODO items alone -->
+    <exclude name="Generic.Commenting.Todo.TaskFound" />
+    <!-- Do not run this rule on tests -->
+    <exclude-pattern>./tests</exclude-pattern>
+    <exclude-pattern>*/vendor/*</exclude-pattern>
+  </rule>
+
+  <!-- Include Commenting rules from Squiz standard -->
+  <rule ref="Squiz.Commenting">
+    <!-- Change from error to warning -->
+    <type>warning</type>
+    <!-- Remove specific commenting rules -->
+    <exclude name="Squiz.Commenting.ClosingDeclarationComment" />
+    <exclude name="Squiz.Commenting.FileComment" />
+    <exclude name="Squiz.Commenting.LongConditionClosingComment" />
+    <!-- Do not run this rule on tests -->
+    <exclude-pattern>./tests</exclude-pattern>
+    <exclude-pattern>*/vendor/*</exclude-pattern>
+  </rule>
+
+</ruleset>
