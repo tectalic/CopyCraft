@@ -1,4 +1,9 @@
 <?php
+
+namespace OM4\CopyCraft;
+
+defined( 'ABSPATH' ) || exit;
+
 /**
  * Plugin Name:     CopyCraft
  * Plugin URI:      http://copycraft.ai
@@ -8,10 +13,30 @@
  * Text Domain:     copycraft
  * Domain Path:     /languages
  * Version:         0.1.0
- *
- * @package         Copycraft
  */
 
-// Your code starts here.
-
 require_once 'includes/autoload.php';
+
+/**
+ * The main plugin class.
+ */
+class Plugin {
+	/**
+	 * Plugin constructor.
+	 */
+	public function __construct() {
+		add_action( 'init', array( $this, 'init' ) );
+	}
+
+	/**
+	 * Initialise the plugin, including all WordPress hooks/filters/actions.
+	 * Exeucted during the `init` hook.
+	 */
+	public function init() {
+		$settings = new Settings();
+		add_action( 'admin_menu', array( $settings, 'register_settings' ) );
+	}
+
+}
+
+$copycraft = new Plugin();
