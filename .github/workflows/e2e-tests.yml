@@ -5,7 +5,7 @@ on: push
 jobs:
   # Run E2E tests against specific WC and PHP versions
   e2e-tests:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
@@ -30,14 +30,15 @@ jobs:
       - name: Install node dependencies
         run: npm ci
 
-      - name: Prepare to Run E2E Tests
-        run: |
-          npm run wp-env:start
-          npm run wp-env:initialise-test
+      - name: Install WordPress
+        run: npm run wp-env:start
+
+      - name: Initialise WordPress
+        run: npm run wp-env:initialise-test
 
       - name: Run E2E Tests
         run: npm run test:e2e
 
-      - name: After E2E Tests
+      - name: Stop WordPress
         if: always()
         run: npm run wp-env:stop
