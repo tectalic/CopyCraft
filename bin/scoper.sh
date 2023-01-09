@@ -31,3 +31,6 @@ php-scoper add-prefix \
 
 mv "$current"/includes/Vendor/Psr/Http/Factory/* "$current"/includes/Vendor/Psr/Http/Message/
 rmdir "$current"/includes/Vendor/Psr/Http/Factory
+
+# Fix for rmccue/requests bundled certificates
+cp -r "$current/vendor/rmccue/requests/certificates" "$current/includes/Vendor/WpOrg/"
