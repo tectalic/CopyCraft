@@ -143,11 +143,6 @@ class Modal {
 
 		$prompt .= "- Name: " . $product->get_name( 'edit' ) . "\n";
 
-		$price = $product->get_price_html();
-		if ( $price ) {
-			$prompt .= "- Price: " . $this->clean_string( $price ) . "\n";
-		}
-
 		$cats = wc_get_product_category_list( $product->get_id() );
 		if ( strlen( $cats ) ) {
 			$prompt .= "- Categories: " . $this->clean_string( $cats ) . "\n";
