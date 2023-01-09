@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
 current=$PWD
-dependencies=('art4/requests-psr18-adapter' 'clue/stream-filter' 'league/container' 'nyholm/psr7' 'php-http/discovery' 'php-http/message' 'php-http/message-factory' 'php-http/multipart-stream-builder' 'psr/container' 'psr/http-client' 'psr/http-message' 'spatie/data-transfer-object' 'tectalic/openai')
+dependencies=('art4/requests-psr18-adapter' 'clue/stream-filter' 'league/container' 'nyholm/psr7' 'php-http/discovery' 'php-http/message' 'php-http/message-factory' 'php-http/multipart-stream-builder' 'psr/container' 'psr/http-client' 'psr/http-message' 'rmccue/requests' 'spatie/data-transfer-object' 'tectalic/openai')
 
-namespaces=('Art4\Requests' 'Clue\StreamFilter' 'League\Container' 'Nyholm\Psr7' 'Http\Discovery' 'Http\Message' 'Http\Message\Factory' 'Http\Message\MultipartStream' 'Psr\Container' 'Psr\Http\Client' 'Psr\Http\Message' 'Spatie\DataTransferObject' 'Tectalic\OpenAi')
+namespaces=('Art4\Requests' 'Clue\StreamFilter' 'League\Container' 'Nyholm\Psr7' 'Http\Discovery' 'Http\Message' 'Http\Message\Factory' 'Http\Message\MultipartStream' 'Psr\Container' 'Psr\Http\Client' 'Psr\Http\Message' 'WpOrg\Requests' 'Spatie\DataTransferObject' 'Tectalic\OpenAi')
 
 for ((i = 0; i < ${#dependencies[@]}; ++i)); do
   output_dir="$current/includes/Vendor/${namespaces[$i]//\\/\/}"
