@@ -35,14 +35,14 @@ final class RetrieveResponse extends AbstractModel
     public $organization_id;
     /** @var string */
     public $status;
-    /** @var \Tectalic\OpenAi\Models\FineTunes\RetrieveResponseHyperparams */
+    /** @var \OM4\CopyCraft\Vendor\Tectalic\OpenAi\Models\FineTunes\RetrieveResponseHyperparams */
     public $hyperparams;
-    /** @var \Tectalic\OpenAi\Models\FineTunes\RetrieveResponseTrainingFilesItem[] */
+    /** @var \OM4\CopyCraft\Vendor\Tectalic\OpenAi\Models\FineTunes\RetrieveResponseTrainingFilesItem[] */
     public $training_files;
-    /** @var \Tectalic\OpenAi\Models\FineTunes\RetrieveResponseValidationFilesItem[] */
+    /** @var \OM4\CopyCraft\Vendor\Tectalic\OpenAi\Models\FineTunes\RetrieveResponseValidationFilesItem[] */
     public $validation_files;
-    /** @var \Tectalic\OpenAi\Models\FineTunes\RetrieveResponseResultFilesItem[] */
+    /** @var \OM4\CopyCraft\Vendor\Tectalic\OpenAi\Models\FineTunes\RetrieveResponseResultFilesItem[] */
     public $result_files;
-    /** @var \Tectalic\OpenAi\Models\FineTunes\RetrieveResponseEventsItem[] */
+    /** @var \OM4\CopyCraft\Vendor\Tectalic\OpenAi\Models\FineTunes\RetrieveResponseEventsItem[] */
     public $events;
 }

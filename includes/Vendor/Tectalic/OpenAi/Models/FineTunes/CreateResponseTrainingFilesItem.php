@@ -33,6 +33,6 @@ final class CreateResponseTrainingFilesItem extends AbstractModel
     public $purpose;
     /** @var string */
     public $status;
-    /** @var \Tectalic\OpenAi\Models\FineTunes\CreateResponseTrainingFilesItemStatusDetails|null */
+    /** @var \OM4\CopyCraft\Vendor\Tectalic\OpenAi\Models\FineTunes\CreateResponseTrainingFilesItemStatusDetails|null */
     public $status_details;
 }

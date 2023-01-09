@@ -23,8 +23,8 @@ final class CreateResponse extends AbstractModel
     public $object;
     /** @var string */
     public $model;
-    /** @var \Tectalic\OpenAi\Models\Embeddings\CreateResponseDataItem[] */
+    /** @var \OM4\CopyCraft\Vendor\Tectalic\OpenAi\Models\Embeddings\CreateResponseDataItem[] */
     public $data;
-    /** @var \Tectalic\OpenAi\Models\Embeddings\CreateResponseUsage */
+    /** @var \OM4\CopyCraft\Vendor\Tectalic\OpenAi\Models\Embeddings\CreateResponseUsage */
     public $usage;
 }

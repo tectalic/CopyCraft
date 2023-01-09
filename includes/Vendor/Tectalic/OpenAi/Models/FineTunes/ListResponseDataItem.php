@@ -35,14 +35,14 @@ final class ListResponseDataItem extends AbstractModel
     public $organization_id;
     /** @var string */
     public $status;
-    /** @var \Tectalic\OpenAi\Models\FineTunes\ListResponseDataItemHyperparams */
+    /** @var \OM4\CopyCraft\Vendor\Tectalic\OpenAi\Models\FineTunes\ListResponseDataItemHyperparams */
     public $hyperparams;
-    /** @var \Tectalic\OpenAi\Models\FineTunes\ListResponseDataItemTrainingFilesItem[] */
+    /** @var \OM4\CopyCraft\Vendor\Tectalic\OpenAi\Models\FineTunes\ListResponseDataItemTrainingFilesItem[] */
     public $training_files;
-    /** @var \Tectalic\OpenAi\Models\FineTunes\ListResponseDataItemValidationFilesItem[] */
+    /** @var \OM4\CopyCraft\Vendor\Tectalic\OpenAi\Models\FineTunes\ListResponseDataItemValidationFilesItem[] */
     public $validation_files;
-    /** @var \Tectalic\OpenAi\Models\FineTunes\ListResponseDataItemResultFilesItem[] */
+    /** @var \OM4\CopyCraft\Vendor\Tectalic\OpenAi\Models\FineTunes\ListResponseDataItemResultFilesItem[] */
     public $result_files;
-    /** @var \Tectalic\OpenAi\Models\FineTunes\ListResponseDataItemEventsItem[] */
+    /** @var \OM4\CopyCraft\Vendor\Tectalic\OpenAi\Models\FineTunes\ListResponseDataItemEventsItem[] */
     public $events;
 }

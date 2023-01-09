@@ -23,6 +23,6 @@ final class CreateResponse extends AbstractModel
     public $id;
     /** @var string */
     public $model;
-    /** @var \Tectalic\OpenAi\Models\Moderations\CreateResponseResultsItem[] */
+    /** @var \OM4\CopyCraft\Vendor\Tectalic\OpenAi\Models\Moderations\CreateResponseResultsItem[] */
     public $results;
 }

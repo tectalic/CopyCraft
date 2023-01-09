@@ -8,7 +8,7 @@ namespaces=('Art4\Requests' 'Clue\StreamFilter' 'League\Container' 'Nyholm\Psr7'
 for ((i = 0; i < ${#dependencies[@]}; ++i)); do
   output_dir="$current/includes/Vendor/${namespaces[$i]//\\/\/}"
   php-scoper add-prefix \
-    --no-config \
+    --config="$current/scoper.php" \
     --force \
     --quiet \
     --output-dir="$output_dir" \
@@ -22,7 +22,7 @@ rmdir "$current"/includes/Vendor/Http/Message/Factory
 
 # Special handling of psr/http-factory independently
 php-scoper add-prefix \
-  --no-config \
+  --config="$current/scoper.php" \
   --force \
   --quiet \
   --output-dir="$current/includes/Vendor/Psr/Http/Factory" \

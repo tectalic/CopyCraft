@@ -21,6 +21,6 @@ final class ListResponse extends AbstractModel
     protected const REQUIRED = ['object', 'data'];
     /** @var string */
     public $object;
-    /** @var \Tectalic\OpenAi\Models\FineTunes\ListResponseDataItem[] */
+    /** @var \OM4\CopyCraft\Vendor\Tectalic\OpenAi\Models\FineTunes\ListResponseDataItem[] */
     public $data;
 }

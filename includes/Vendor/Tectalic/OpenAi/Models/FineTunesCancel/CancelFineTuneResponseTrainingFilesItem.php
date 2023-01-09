@@ -33,6 +33,6 @@ final class CancelFineTuneResponseTrainingFilesItem extends AbstractModel
     public $purpose;
     /** @var string */
     public $status;
-    /** @var \Tectalic\OpenAi\Models\FineTunesCancel\CancelFineTuneResponseTrainingFilesItemStatusDetails|null */
+    /** @var \OM4\CopyCraft\Vendor\Tectalic\OpenAi\Models\FineTunesCancel\CancelFineTuneResponseTrainingFilesItemStatusDetails|null */
     public $status_details;
 }
