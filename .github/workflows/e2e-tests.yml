@@ -9,51 +9,35 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        wordpress:
-          - '6.1.1'
-        woocommerce:
-          - 'latest'
-          # TODO: test against other WooCommerce versions by modifying wp-content/plugins/copycraft/tests/e2e/docker/initialize.sh
+        # NOTE: WordPress and WooCommerce versions can be configured in the .wp-env.json file
         php:
           - '7.4'
           - '8.0'
 
-    name: E2E - WC ${{ matrix.woocommerce }} | WP ${{ matrix.wordpress }} | PHP ${{ matrix.php }}
+    name: E2E on PHP ${{ matrix.php }}
 
     steps:
       - name: Checkout CopyCraft repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Setup NodeJS and Cache Dependencies
         uses: actions/setup-node@v3
         with:
+          node-version: 16
           cache: 'npm'
-          node-version-file: '.nvmrc'
 
       # Install node dependencies if not present on cache
       - name: Install node dependencies
         run: npm ci
 
-      - name: Kill process running on port 8084
-        shell: bash
-        run: |
-          echo "::group::Kill webserver running on port 8084"
-          sudo fuser -k -n tcp 8084
-          echo "::endgroup::"
-
       - name: Prepare to Run E2E Tests
         run: |
-          PHP_VERSION=${{ matrix.php }} WP_VERSION=${{ matrix.wordpress }} npm run docker:up
-          docker ps
-          echo "Sleeping for 60 seconds to ensure containers are up and running..."
-          sleep 60
-          docker ps
-          curl -v "http://localhost:8084/"
-          curl -v "http://localhost:8084/?pagename=ready"
+          npm run wp-env:start
+          npm run wp-env:initialise-test
 
       - name: Run E2E Tests
         run: npm run test:e2e
 
       - name: After E2E Tests
         if: always()
-        run: npm run docker:down
+        run: npm run wp-env:stop
