@@ -1,0 +1,44 @@
+name: E2E Tests
+
+on: push
+
+jobs:
+  e2e-tests:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # NOTE: WordPress and WooCommerce versions can be configured in the .wp-env.json file
+        php:
+          - '7.4'
+          - '8.0'
+
+    name: E2E on PHP ${{ matrix.php }}
+
+    steps:
+      - name: Checkout CopyCraft repository
+        uses: actions/checkout@v3
+
+      - name: Setup NodeJS and Cache Dependencies
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: 'npm'
+
+      # Install node dependencies if not present on cache
+      - name: Install node dependencies
+        run: npm ci
+
+      - name: Install WordPress
+        run: npm run wp-env:start
+
+      # Disabled due bug in GitHub Actions
+      # - name: Initialise WordPress
+      #   run: npm run wp-env:initialise-test
+
+      - name: Run E2E Tests
+        run: npm run test:e2e
+
+      - name: Stop WordPress
+        if: always()
+        run: npm run wp-env:stop

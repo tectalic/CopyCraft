@@ -4,13 +4,14 @@
 .editorconfig
 .git
 .gitignore
+.wp-env.json
 *~
 /node_modules
 /vendor
 bin
 composer.json
 composer.lock
-Gruntfile.js
-node_modules
+jest.config.js
 package-lock.json
 package.json
+tests

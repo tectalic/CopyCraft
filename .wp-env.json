@@ -1,0 +1,10 @@
+{
+  "plugins": [
+    ".",
+    "https://downloads.wordpress.org/plugin/query-monitor.zip",
+    "https://downloads.wordpress.org/plugin/woocommerce.zip",
+    "https://downloads.wordpress.org/plugin/wordpress-importer.zip",
+    "https://downloads.wordpress.org/plugin/wp-mail-logging.zip",
+    "https://github.com/Rarst/laps/releases/download/3.3.7/laps.zip"
+  ]
+}
