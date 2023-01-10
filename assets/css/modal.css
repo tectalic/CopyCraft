@@ -1,0 +1,11 @@
+body {
+    margin: 20px;
+}
+
+div.buttons {
+    text-align: right;
+}
+
+div.buttons button {
+    margin: 10px;
+}

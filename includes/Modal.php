@@ -42,19 +42,53 @@ class Modal {
 		if ( 'product' !== $post_type ) {
 			return;
 		}
+
+		$this->register_scripts();
+
 		add_thickbox();
-		// TODO: version number
-		wp_enqueue_script( 'copycraft',
-			plugin_dir_url( __FILE__ ) . '../js/copycraft.js',
+		wp_enqueue_script( 'copycraft-products');
+	}
+
+	/**
+	 * Register all scripts and stylesheets.
+	 */
+	protected function register_scripts() {
+		wp_register_script( 'copycraft-products',
+			plugin_dir_url( __FILE__ ) . '../assets/js/products.js',
 			array( 'jquery', 'thickbox' ),
-			rand( 1, 1000 ),
-			true );
+			rand( 1, 1000 ), // TODO: version number
+			true
+		);
+		wp_register_script( 'copycraft-modal',
+			plugin_dir_url( __FILE__ ) . '../assets/js/modal.js',
+			array( 'jquery' ),
+			rand( 1, 1000 ), // TODO: version number
+			true
+		);
+		wp_register_style(
+			'copycraft-modal',
+			plugins_url( '../assets/css/modal.css', __FILE__ ),
+			array(),
+			rand( 1, 1000 ), // TODO: version number
+		);
 	}
 
 	/**
 	 * Output the HTML content that is displayed in the modal.
 	 */
 	public function copycraft_modal_content() {
+
+		$this->register_scripts();
+
+		echo '<html>';
+		echo '<head>';
+		wp_enqueue_script('copycraft-modal');
+		wp_enqueue_style('copycraft-modal');
+		wp_print_scripts();
+		wp_print_styles();
+		echo '</head>';
+		echo '<body>';
+
 		if ( ! current_user_can( 'edit_products' ) ) {
 			wp_die( __( 'Access denied', 'copycraft' ) );
 		}
@@ -76,29 +110,25 @@ class Modal {
 		}
 
 		try {
+
 			echo '<div>';
 			$newDescription = $this->generator->generate( $product );
-			echo '<textarea id="copycraft-generated-description" style="width: 100%; height: 300px;">' . $newDescription . '</textarea>';
+			echo '<textarea id="description" style="width: 100%; height: 300px;">' . $newDescription . '</textarea>';
+
+			echo '<div class="buttons">';
+			echo '<button id="replace" class="button button-primary button-large">' . esc_html__('Replace', 'copycraft') . '</button>';
+			echo '<button id="insert" class="button button-primary button-large">' . esc_html__('Insert', 'copycraft') . '</button>';
+			echo '<button id="refresh" class="button button-primary button-large">' . esc_html__('Try again', 'copycraft') . '</button>';
+			echo '<button id="discard" class="button button-primary button-large">' . esc_html__('Discard', 'copycraft') . '</button>';
 			echo '</div>';
 
-
-			wp_enqueue_script('jquery');
-			wp_print_scripts();
-			echo '<script>
-				jQuery("#copycraft-generated-description").focus(function() {
-					var $this = jQuery(this);
-					$this.select();
-					$this.mouseup(function() {
-						$this.unbind("mouseup");
-						return false;
-					});
-				});</script>';
-
-			exit;
 		} catch ( Exception $e ) {
 			// TODO: log the error.
 			echo '<pre>' . $e->getMessage() . '</pre>';
 			wp_die( __( 'An unexpected error occurred. Please try again.', 'copycraft' ) );
+		} finally {
+			echo '</body>';
+			exit;
 		}
 	}
 

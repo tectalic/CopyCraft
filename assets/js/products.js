@@ -1,5 +1,4 @@
 jQuery(document).ready(function($){
-
     $('#copycraft-open-modal-button').on('click',function() {
         // Trigger a WordPress autosave to ensure the backend has the latest product data.
         window.wp.autosave.server.triggerSave();
