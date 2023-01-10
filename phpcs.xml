@@ -8,7 +8,6 @@
   <file>./tests</file>
   <file>./copycraft.php</file>
   <exclude-pattern>./node_modules</exclude-pattern>
-  <exclude-pattern>./tests/coverage</exclude-pattern>
   <exclude-pattern>./vendor</exclude-pattern>
 
   <!-- command-line config -->
@@ -22,7 +21,7 @@
   </rule>
 
   <!-- Set supported WP version same as the plugin itself -->
-  <config name="minimum_supported_wp_version" value="4.9" />
+  <config name="minimum_supported_wp_version" value="5.9" />
 
   <!-- Set text domain to enable checking -->
   <rule ref="WordPress.WP.I18n">
@@ -31,32 +30,6 @@
         <element value="copycraft" />
       </property>
     </properties>
-  </rule>
-
-  <!-- Mark WooCommerce's `wc_clean` as snaitising function -->
-  <rule ref="WordPress.Security.ValidatedSanitizedInput">
-    <properties>
-      <property name="customSanitizingFunctions" type="array">
-        <element value="wc_clean" />
-      </property>
-    </properties>
-  </rule>
-
-  <!-- Ignore short array syntax (part of WordPress standard) for test -->
-  <!-- see: https://github.com/WordPress/WordPress-Coding-Standards/pull/1770 -->
-  <rule ref="Generic.Arrays.DisallowShortArraySyntax.Found">
-    <exclude-pattern>./tests</exclude-pattern>
-  </rule>
-
-  <!-- Fine control alternative function check -->
-  <rule ref="WordPress.WP.AlternativeFunctions">
-    <properties>
-      <property name="exclude" type="array">
-        <element value="json_encode" />
-      </property>
-    </properties>
-    <!-- Do not run this rule on tests -->
-    <exclude-pattern>./tests</exclude-pattern>
   </rule>
 
   <!-- Include all rules from phpcompatibility/phpcompatibility-wp -->
@@ -69,9 +42,6 @@
   <rule ref="Generic.Commenting">
     <!-- Leave TODO items alone -->
     <exclude name="Generic.Commenting.Todo.TaskFound" />
-    <!-- Do not run this rule on tests -->
-    <exclude-pattern>./tests</exclude-pattern>
-    <exclude-pattern>*/vendor/*</exclude-pattern>
   </rule>
 
   <!-- Include Commenting rules from Squiz standard -->
@@ -82,9 +52,12 @@
     <exclude name="Squiz.Commenting.ClosingDeclarationComment" />
     <exclude name="Squiz.Commenting.FileComment" />
     <exclude name="Squiz.Commenting.LongConditionClosingComment" />
-    <!-- Do not run this rule on tests -->
-    <exclude-pattern>./tests</exclude-pattern>
-    <exclude-pattern>*/vendor/*</exclude-pattern>
   </rule>
+
+<!--
+Prevent errors caused by WordPress Coding Standards not supporting PHP 8.0+.
+SEE: https://github.com/WordPress/WordPress-Coding-Standards/issues/2035#issuecomment-1325532520
+-->
+<ini name="error_reporting" value="E_ALL &#38; ~E_DEPRECATED" />
 
 </ruleset>
