@@ -3,10 +3,9 @@
 namespace OM4\CopyCraft;
 
 use Exception;
-use OM4\CopyCraft\Vendor\Art4\Requests\Psr\HttpClient;
-use OM4\CopyCraft\Vendor\Tectalic\OpenAi\Authentication;
+use OM4\CopyCraft\Settings\Data;
+use OM4\CopyCraft\Vendor\Tectalic\OpenAi\Client as OpenAiClient;
 use OM4\CopyCraft\Vendor\Tectalic\OpenAi\ClientException;
-use OM4\CopyCraft\Vendor\Tectalic\OpenAi\Manager;
 use OM4\CopyCraft\Vendor\Tectalic\OpenAi\Models\Completions\CreateRequest as CompletionsRequest;
 use OM4\CopyCraft\Vendor\Tectalic\OpenAi\Models\Moderations\CreateRequest as ModerationsRequest;
 use OM4\CopyCraft\Vendor\Tectalic\OpenAi\Models\Completions\CreateResponse as CompletionsResponse;
@@ -18,9 +17,13 @@ use WC_Product;
  */
 class OpenAi_Generator {
 
-	public function __construct() {
-		// TODO: Inject dependencies
-		// - OpenAI Client
+	protected Data $settings;
+
+	protected OpenAiClient $client;
+
+	public function __construct(Data $settings, OpenAiClient $client) {
+		$this->settings = $settings;
+		$this->client = $client;
 	}
 
 	/**
@@ -32,16 +35,14 @@ class OpenAi_Generator {
 	 * @throws Exception
 	 */
 	public function generate( WC_Product $product ) {
-		// TODO: replace with Settings class call.
-		$key = get_option( 'copycraft_options' );
-		if ( ! is_array( $key ) || ! isset( $key['openai_api_key'] ) ) {
+		$settings = $this->settings->get_settings();
+		if ( ! is_array( $settings ) || ! isset( $settings['openai_api_key'] ) ) {
 			throw new \Exception( __( 'Please enter your OpenAI API key in the CopyCraft settings.', 'copycraft' ) );
 		}
 
 		$prompt = $this->build_prompt( $product );
 
 		try {
-			$client      = Manager::build( new HttpClient(), new Authentication( $key['openai_api_key'] ) );
 
 			// Moderate the prompt to ensure it's safe to use.
 			// The moderation result is cached to improve performance.
@@ -51,7 +52,7 @@ class OpenAi_Generator {
 				// Moderate the prompt, and store the result flag in a transient.
 
 				/** @var ModerationsResponse $result */
-				$result = $client->moderations()->create(
+				$result = $this->client->moderations()->create(
 					new ModerationsRequest( [ 'input' => $prompt ] )
 				)->toModel();
 
@@ -67,7 +68,7 @@ class OpenAi_Generator {
 			}
 
 			// Generate the product description using the OpenAI completions API.
-			$completions = $client->completions();
+			$completions = $this->client->completions();
 			/** @var CompletionsResponse $result */
 			$result = $completions->create( new CompletionsRequest( [
 				'model'       => 'text-davinci-003',
@@ -78,7 +79,7 @@ class OpenAi_Generator {
 			$newDescription = $result->choices[0]->text;
 
 			// Moderate the result.
-			$result = $client->moderations()->create(
+			$result = $this->client->moderations()->create(
 				new ModerationsRequest( [ 'input' => $newDescription ] )
 			)->toModel();
 
