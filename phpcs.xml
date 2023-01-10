@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+
+<ruleset name="OM4 WordPress" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="./vendor/squizlabs/php_codesniffer/phpcs.xsd">
+  <description>OM4 Coding Standards for WordPress projects</description>
+
+  <!-- Define files to check -->
+  <file>./includes</file>
+  <file>./tests</file>
+  <file>./copycraft.php</file>
+  <exclude-pattern>./node_modules</exclude-pattern>
+  <exclude-pattern>./vendor</exclude-pattern>
+
+  <!-- command-line config -->
+  <arg name="extensions" value="php" />
+
+  <!-- Include all rules from WordPress standard -->
+  <rule ref="WordPress">
+    <!-- Ignore filename check -->
+    <exclude name="WordPress.Files.FileName" />
+    <exclude-pattern>*/vendor/*</exclude-pattern>
+  </rule>
+
+  <!-- Set supported WP version same as the plugin itself -->
+  <config name="minimum_supported_wp_version" value="5.9" />
+
+  <!-- Set text domain to enable checking -->
+  <rule ref="WordPress.WP.I18n">
+    <properties>
+      <property name="text_domain" type="array">
+        <element value="copycraft" />
+      </property>
+    </properties>
+  </rule>
+
+  <!-- Include all rules from phpcompatibility/phpcompatibility-wp -->
+  <rule ref="PHPCompatibilityWP" />
+
+  <!-- Set supported PHP version same as the plugin itself -->
+  <config name="testVersion" value="7.4-" />
+
+  <!-- Include Commenting rules from Generic standard -->
+  <rule ref="Generic.Commenting">
+    <!-- Leave TODO items alone -->
+    <exclude name="Generic.Commenting.Todo.TaskFound" />
+  </rule>
+
+  <!-- Include Commenting rules from Squiz standard -->
+  <rule ref="Squiz.Commenting">
+    <!-- Change from error to warning -->
+    <type>warning</type>
+    <!-- Remove specific commenting rules -->
+    <exclude name="Squiz.Commenting.ClosingDeclarationComment" />
+    <exclude name="Squiz.Commenting.FileComment" />
+    <exclude name="Squiz.Commenting.LongConditionClosingComment" />
+  </rule>
+
+<!--
+Prevent errors caused by WordPress Coding Standards not supporting PHP 8.0+.
+SEE: https://github.com/WordPress/WordPress-Coding-Standards/issues/2035#issuecomment-1325532520
+-->
+<ini name="error_reporting" value="E_ALL &#38; ~E_DEPRECATED" />
+
+</ruleset>
