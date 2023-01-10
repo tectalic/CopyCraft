@@ -26,14 +26,6 @@ jQuery(document).ready(function ($) {
                 console.log('Discard click');
                 copyCraft.close();
             });
-            jQuery(document).on('focus', '#copycraft-modal-contents #description', function () {
-                var $this = jQuery(this);
-                $copyCraft.select();
-                $copyCraft.mouseup(function () {
-                    $copyCraft.off("mouseup");
-                    return false;
-                });
-            });
         },
         modalClick(elem) {
             // Trigger a WordPress autosave to ensure the backend has the latest product data.
