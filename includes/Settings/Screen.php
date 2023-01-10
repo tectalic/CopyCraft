@@ -11,7 +11,6 @@ defined( 'ABSPATH' ) || exit;
  */
 class Screen {
 
-
 	/**
 	 * Settings Data Instance.
 	 *

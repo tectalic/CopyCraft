@@ -31,7 +31,7 @@ class Data {
 	 */
 	public function set_settings( array $options ) {
 		if ( self::valid( $options ) ) {
-			add_option()(
+			update_option(
 				'copycraft_options',
 				$options
 			);

@@ -43,7 +43,7 @@ class Plugin {
 
 	/**
 	 * Initialise the plugin, including all WordPress hooks/filters/actions.
-	 * Exeucted during the `init` hook.
+	 * Executed during the `init` hook.
 	 */
 	public function init() {
 		$settings = $this->container->get( Register::class );
