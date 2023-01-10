@@ -45,7 +45,7 @@ jQuery(document).ready(function ($) {
             if (false == $('#copycraft-modal-contents').data('initialised')) {
                 copyCraft.loadModal();
             }
-            tb_show('CopyCraft', '#TB_inline?inlineId=copycraft-modal&width=700&height=600');
+            tb_show('CopyCraft', '#TB_inline?inlineId=copycraft-modal&width=600&height=370');
         },
         close() {
             $('#TB_closeWindowButton').click();
@@ -60,7 +60,7 @@ jQuery(document).ready(function ($) {
             };
 
             $.get(copycraft.ajaxurl, ajaxParams, function (response) {
-                $('#copycraft-modal-contents').html(response).data('initialised', true).fadeIn();
+                $('#copycraft-modal-contents').attr('data-initialised', true).html(response).fadeIn();
             });
         },
         getDescription() {

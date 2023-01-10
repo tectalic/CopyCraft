@@ -78,7 +78,7 @@ class Screen {
 			'copycraft',
 			array(
 				'ajaxurl' => admin_url( 'admin-ajax.php' ),
-				'loading' => __( 'Please wait ...', 'copycraft' ),
+				'loading' => __( 'Generating description, please wait ...', 'copycraft' ),
 			)
 		);
 
