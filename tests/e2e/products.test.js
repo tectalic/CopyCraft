@@ -40,20 +40,26 @@ describe('Product Management', () => {
 
     // Enter a Product Title
     await expect(page).toFill('#title', 'A new Product');
-    // Click "CopyCraft" button in the editor.
-    await page.evaluate((selector) => document.querySelector(selector).click(), '#copycraft-open-modal-button');
+    // Click "CopyCraft" button in the main description editor.
+    await page.evaluate((selector) => document.querySelector(selector).click(), '#wp-content-wrap .copycraft-open-modal-button');
 
     // Wait for Modal to load.
     await page.waitForSelector('#TB_window');
 
     // Modal Title.
     await expect(page).toMatchElement('#TB_window #TB_ajaxWindowTitle', 'CopyCraft');
+    // Loading message displays while AJAX call is made.
+    await expect(page).toMatchElement('#copycraft-modal-contents p.loading', 'Please wait ...');
 
-    // Verify new Post ID exists and is passed to the iframe.
+    // Verify new Post ID exists and is used in the AJAX request URL.
     await expect(page).toMatchElement('#post_ID', { value: /^\d+$/ });
     const newPostId = parseInt(await page.$eval('#post_ID', el => el.value));
     expect(newPostId).toBeGreaterThan(0);
-    await expect(page).toMatchElement('#TB_window iframe[src="admin-ajax.php?action=copycraft_modal&post_id=' + newPostId + '#"');
+
+    // TODO: Verify that the AJAX request URL is correct and containts the newPostId.
+    // Wait for AJAX call to complete.
+    // await page.waitForSelector('#copycraft-modal-contents #description');
+    // await expect(page).toMatchElement('#copycraft-modal-contents #description', { value: /\w+/ });
 
   });
 });

@@ -1,0 +1,14 @@
+#copycraft-modal-contents {
+    margin: 20px;
+}
+#copycraft-modal-contents .error {
+    color: #ff0000;
+}
+
+#copycraft-modal-contents div.buttons {
+    text-align: right;
+}
+
+#copycraft-modal-contents div.buttons button {
+    margin: 10px;
+}
