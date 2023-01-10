@@ -35,4 +35,25 @@ describe('Product Management', () => {
     await expect(page).toMatchElement('#title', 'Published Product');
     await expect(page).toMatch('Product published.');
   });
+  it('Can display a Modal when CopyCraft button clicked', async () => {
+    expect.assertions(5);
+
+    // Enter a Product Title
+    await expect(page).toFill('#title', 'A new Product');
+    // Click "CopyCraft" button in the editor.
+    await page.evaluate((selector) => document.querySelector(selector).click(), '#copycraft-open-modal-button');
+
+    // Wait for Modal to load.
+    await page.waitForSelector('#TB_window');
+
+    // Modal Title.
+    await expect(page).toMatchElement('#TB_window #TB_ajaxWindowTitle', 'CopyCraft');
+
+    // Verify new Post ID exists and is passed to the iframe.
+    await expect(page).toMatchElement('#post_ID', { value: /^\d+$/ });
+    const newPostId = parseInt(await page.$eval('#post_ID', el => el.value));
+    expect(newPostId).toBeGreaterThan(0);
+    await expect(page).toMatchElement('#TB_window iframe[src="admin-ajax.php?action=copycraft_modal&post_id=' + newPostId + '#"');
+
+  });
 });
