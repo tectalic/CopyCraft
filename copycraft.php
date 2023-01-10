@@ -56,7 +56,7 @@ class Plugin {
 		$settings = $this->container->get( Register::class );
 		add_action( 'admin_menu', array( $settings, 'register_settings' ) );
 
-		$modal = new Modal();
+		$modal = $this->container->get(Modal::class);
 		$modal->init();
 	}
 }
