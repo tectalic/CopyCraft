@@ -5,8 +5,8 @@
   "scripts": {
     "test:e2e": "jest e2e",
     "wp-env:destroy": "wp-env destroy",
-    "wp-env:initialise-dev": "wp-env run cli /var/www/html/wp-content/plugins/copycraft/tests/wp-env/initialize.sh",
-    "wp-env:initialise-test": "wp-env run tests-cli /var/www/html/wp-content/plugins/copycraft/tests/wp-env/initialize.sh",
+    "wp-env:initialise-dev": "wp-env run cli /var/www/html/wp-content/uploads/wp-env/initialize.sh",
+    "wp-env:initialise-test": "wp-env run tests-cli /var/www/html/wp-content/uploads/wp-env/initialize.sh",
     "wp-env:initialise": "npm run wp-env:initialise-dev && npm run wp-env:initialise-test",
     "wp-env:start": "wp-env start",
     "wp-env:stop": "wp-env stop",
