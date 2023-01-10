@@ -44,8 +44,15 @@ class Plugin {
 	/**
 	 * Initialise the plugin, including all WordPress hooks/filters/actions.
 	 * Executed during the `init` hook.
+	 *
+	 * @return void
 	 */
 	public function init() {
+		/**
+		 * Register instance for settings screen.
+		 *
+		 * @var Register $settings
+		 */
 		$settings = $this->container->get( Register::class );
 		add_action( 'admin_menu', array( $settings, 'register_settings' ) );
 	}

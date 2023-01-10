@@ -15,12 +15,16 @@ class Data {
 	 * @return array<string, string>
 	 */
 	public function get_settings() {
-		return get_option(
+		/**
+		 * Default settings.
+		 *
+		 * @var array<string, string> settings.
+		 */
+		$options = get_option(
 			'copycraft_options',
-			array(
-				'openai_api_key' => '',
-			)
+			array( 'openai_api_key' => '' )
 		);
+		return $options;
 	}
 
 	/**
@@ -47,6 +51,6 @@ class Data {
 	public static function valid( $options ) {
 		// Validate that the string is a valid OpenAI API key.
 		// Keys begin with `sk- and have at least 35 characters.
-		return ( preg_match( '/^sk-[a-zA-Z0-9]{32,}$/', $options['openai_api_key'] ) );
+		return preg_match( '/^sk-[a-zA-Z0-9]{32,}$/', $options['openai_api_key'] ) === 1;
 	}
 }

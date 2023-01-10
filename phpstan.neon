@@ -1,0 +1,10 @@
+parameters:
+	paths:
+		- copycraft.php
+		- includes
+	excludePaths:
+		analyse:
+			- includes/Vendor
+	fileExtensions:
+		- php
+	level: max
