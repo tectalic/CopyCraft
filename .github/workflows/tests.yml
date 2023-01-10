@@ -1,0 +1,75 @@
+name: Tests
+
+on: push
+
+jobs:
+  php-tests:
+    runs-on: ubuntu-latest
+
+    name: PHP Static
+
+    steps:
+      - name: Checkout CopyCraft repository
+        uses: actions/checkout@v3
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+
+      - name: Display PHP environment
+        run: |
+          php -v
+          composer check-platform-reqs
+
+      - name: Get composer cache directory
+        id: composer-cache
+        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: ${{ runner.os }}-composer-
+
+      - name: Install dependencies
+        run: composer install --optimize-autoloader
+
+      - name: Run 'phpcs' check
+        run: composer test:style
+
+      - name: Run 'phpstan' check
+        run: composer test:static
+
+  e2e-tests:
+    runs-on: ubuntu-latest
+    # NOTE: WordPress and WooCommerce versions can be configured in the .wp-env.json file
+
+    name: E2E
+
+    steps:
+      - name: Checkout CopyCraft repository
+        uses: actions/checkout@v3
+
+      - name: Setup NodeJS and Cache Dependencies
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: 'npm'
+
+      # Install node dependencies if not present on cache
+      - name: Install node dependencies
+        run: npm ci
+
+      - name: Install WordPress
+        run: npm run wp-env:start
+
+      # Disabled due bug in GitHub Actions
+      # - name: Initialise WordPress
+      #   run: npm run wp-env:initialise-test
+
+      - name: Run E2E Tests
+        run: npm run test:e2e
+
+      - name: Stop WordPress
+        if: always()
+        run: npm run wp-env:stop

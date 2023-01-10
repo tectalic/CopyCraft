@@ -15,4 +15,5 @@ jest.config.js
 package-lock.json
 package.json
 phpcs.xml
+phpstan.neon
 tests
