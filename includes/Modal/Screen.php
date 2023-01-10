@@ -34,6 +34,9 @@ class Screen {
 	 * @return void
 	 */
 	public function add_form_button() {
+		if ( ! $this->is_product_screen() ) {
+			return;
+		}
 		echo '<a title="' . esc_attr__( 'CopyCraft', 'copycraft' ) . '" class="button copycraft-open-modal-button">
 			<span class="dashicons dashicons-superhero"></span> ' . esc_html__( 'CopyCraft', 'copycraft' ) . '</a>';
 	}
@@ -56,18 +59,11 @@ class Screen {
 	 *
 	 * Executed during the `admin_enqueue_scripts` hook.
 	 *
-	 * @param string $hook_suffix Hook Suffix (the current admin page). @see https://developer.wordpress.org/reference/hooks/admin_enqueue_scripts/.
-	 *
 	 * @return void
 	 */
-	public function admin_enqueue_scripts( $hook_suffix ) {
+	public function admin_enqueue_scripts() {
 		// Ensure we are on the add or edit product screens.
-		if ( ! in_array( $hook_suffix, array( 'post.php', 'post-new.php' ), true ) ) {
-			return;
-		}
-
-		global $post_type;
-		if ( 'product' !== $post_type ) {
+		if ( ! $this->is_product_screen() ) {
 			return;
 		}
 
@@ -163,6 +159,21 @@ class Screen {
 	 */
 	protected function error( $error_message ) {
 		die( '<p class="error">' . esc_html( $error_message ) . '</p>' );
+	}
+
+	/**
+	 * Whether the current screen is a WooCommerce Add or Edit Product screen.
+	 *
+	 * @return bool
+	 */
+	protected function is_product_screen() {
+		global $pagenow, $post_type;
+
+		if ( ! in_array( $pagenow, array( 'post.php', 'post-new.php' ), true ) ) {
+			return false;
+		}
+
+		return 'product' === $post_type;
 	}
 
 }
