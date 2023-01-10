@@ -1,9 +1,4 @@
 <?php
-
-namespace OM4\CopyCraft;
-
-defined( 'ABSPATH' ) || exit;
-
 /**
  * Plugin Name:     CopyCraft
  * Plugin URI:      http://copycraft.ai
@@ -15,16 +10,34 @@ defined( 'ABSPATH' ) || exit;
  * Version:         0.1.0
  */
 
+namespace OM4\CopyCraft;
+
+use OM4\CopyCraft\Settings\Register;
+use OM4\CopyCraft\Vendor\League\Container\Container;
+use OM4\CopyCraft\Vendor\League\Container\ReflectionContainer;
+
+defined( 'ABSPATH' ) || exit;
+
 require_once 'includes/autoload.php';
 
 /**
  * The main plugin class.
  */
 class Plugin {
+
+	/**
+	 * Dependency Injection Container instance.
+	 *
+	 * @var Container
+	 */
+	private Container $container;
+
 	/**
 	 * Plugin constructor.
 	 */
 	public function __construct() {
+		$this->container = new Container();
+		$this->container->delegate( new ReflectionContainer( true ) );
 		add_action( 'init', array( $this, 'init' ) );
 	}
 
@@ -33,10 +46,9 @@ class Plugin {
 	 * Exeucted during the `init` hook.
 	 */
 	public function init() {
-		$settings = new Settings();
+		$settings = $this->container->get( Register::class );
 		add_action( 'admin_menu', array( $settings, 'register_settings' ) );
 	}
-
 }
 
 $copycraft = new Plugin();
