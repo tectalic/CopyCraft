@@ -22,7 +22,7 @@ rmdir "$current"/includes/Vendor/Http/Message/Factory
 
 # Special handling of psr/http-factory independently
 php-scoper add-prefix \
-  --config="$current/scoper.php" \
+  --no-config \
   --force \
   --quiet \
   --output-dir="$current/includes/Vendor/Psr/Http/Factory" \
