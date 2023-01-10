@@ -27,7 +27,7 @@ If you are using Windows, we recommend using [Windows Subsystem for Linux (WSL)]
 - `cd` to the **CopyCraft** plugin folder
 - Run `npm install`
 - Run `npm run wp-env:start` will build the test site using Docker.
-- Run `npm run wp-env:initialise` - it will run the initialisation script (`tests/wp-env/initialize.sh`).
+- Run `npm run wp-env:initialise` - it will run the initialisation script (`tests/wp-env/initialise.sh`).
 - Run `docker ps` - to confirm that the Docker containers were built and running. You should see output similar to the one below, indicating that everything had been built as expected:
 
 ```
