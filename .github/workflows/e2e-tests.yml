@@ -3,7 +3,6 @@ name: E2E Tests
 on: push
 
 jobs:
-  # Run E2E tests against specific WC and PHP versions
   e2e-tests:
     runs-on: ubuntu-latest
     strategy:

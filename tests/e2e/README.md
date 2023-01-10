@@ -1,6 +1,6 @@
 # CopyCraft End-to-End Tests
 
-Automated end-to-end (e2e) tests for CopyCraft. Based on https://github.com/woocommerce/woocommerce-e2e-boilerplate/.
+Automated end-to-end (e2e) tests for CopyCraft.
 
 ## Pre-requisites
 
@@ -27,7 +27,7 @@ If you are using Windows, we recommend using [Windows Subsystem for Linux (WSL)]
 - `cd` to the **CopyCraft** plugin folder
 - Run `npm install`
 - Run `npm run wp-env:start` will build the test site using Docker.
-- Run `npm run wp-env:initialise` - it will run the initialisation script.
+- Run `npm run wp-env:initialise` - it will run the initialisation script (`tests/wp-env/initialize.sh`).
 - Run `docker ps` - to confirm that the Docker containers were built and running. You should see output similar to the one below, indicating that everything had been built as expected:
 
 ```
@@ -42,8 +42,8 @@ This plugin uses the [@wordpress/env](https://www.npmjs.com/package/@wordpress/e
 
 The `wp-env` creates two sets of WordPress Environments, one for development and one for testing.
 
-- Navigate to `http://localhost:8888/` for the development environment
-- Navigate to `http://localhost:8889/` for the testing environment
+- Navigate to [http://localhost:8888/](http://localhost:8888/) for the development environment
+- Navigate to [http://localhost:8889/](http://localhost:8889/) for the testing environment
 
 For both environments, use the following Admin user details to log in:
 
@@ -57,11 +57,21 @@ PW: password
 
 Note that running `npm run wp-env:stop` and then `npm run wp-env:start` does not re-initialise it. Instead, use `npm run wp-env:destroy` and `npm run wp-env:start` to start anew.
 
+### WordPress and WooCommerce Versions
+
+By default, the build environments will be running the latest stable WordPress and WooCommerce versions.
+
+You can modify the `.wp-env.json` file to change the WordPress and WooCommerce versions, then re-build the environments by running `wp-env:update`.
+
+```
+
 ### Run e2e tests
 
 ```bash
 npm run test:e2e
 ```
+
+The tests run against the testing environment, which is available at [http://localhost:8889/](http://localhost:8889/).
 
 ### Run tests in debug mode
 
