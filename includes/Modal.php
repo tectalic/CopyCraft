@@ -93,10 +93,7 @@ class Modal {
 
 		$postId = intval( $_GET['post_id'] );
 
-		$autosave  = wp_get_post_autosave( $postId, get_current_user_id() );
-		$autosave2 = wp_get_post_autosave( $postId );
-
-		$product = wc_get_product( false === $autosave ? $postId : $autosave->ID );
+		$product = wc_get_product( $postId );
 
 		if ( ! is_a( $product, '\WC_Product' ) ) {
 			$this->error( __( 'Please save your product and try again.', 'copycraft' ) );
