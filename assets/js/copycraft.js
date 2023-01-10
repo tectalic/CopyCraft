@@ -45,7 +45,7 @@ jQuery(document).ready(function ($) {
             if (false == $('#copycraft-modal-contents').data('initialised')) {
                 copyCraft.loadModal();
             }
-            tb_show('CopyCraft', '#TB_inline?inlineId=copycraft-modal&width=700&height=400');
+            tb_show('CopyCraft', '#TB_inline?inlineId=copycraft-modal&width=700&height=600');
         },
         close() {
             $('#TB_closeWindowButton').click();
