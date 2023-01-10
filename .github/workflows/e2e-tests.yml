@@ -33,8 +33,9 @@ jobs:
       - name: Install WordPress
         run: npm run wp-env:start
 
-      - name: Initialise WordPress
-        run: npm run wp-env:initialise-test
+      # Disabled due bug in GitHub Actions
+      # - name: Initialise WordPress
+      #   run: npm run wp-env:initialise-test
 
       - name: Run E2E Tests
         run: npm run test:e2e
