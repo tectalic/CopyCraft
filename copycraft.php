@@ -67,16 +67,21 @@ class Plugin {
 
 		$this->container->delegate( new ReflectionContainer( true ) );
 
-		add_action( 'admin_init', array( $this, 'admin_init' ) );
+		add_action( 'init', array( $this, 'admin_init' ) );
 	}
 
 	/**
 	 * Initialise the plugin, including all WordPress hooks/filters/actions.
-	 * Executed during the `admin_init` hook.
+	 * Executed during the `init` hook.
 	 *
 	 * @return void
 	 */
 	public function admin_init() {
+		if ( ! is_admin()) {
+			// Non wp-admin page.
+			return;
+		}
+
 		/**
 		 * Register instance for settings screen.
 		 *
