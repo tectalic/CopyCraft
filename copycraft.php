@@ -66,16 +66,17 @@ class Plugin {
 		);
 
 		$this->container->delegate( new ReflectionContainer( true ) );
-		add_action( 'init', array( $this, 'init' ) );
+
+		add_action( 'admin_init', array( $this, 'admin_init' ) );
 	}
 
 	/**
 	 * Initialise the plugin, including all WordPress hooks/filters/actions.
-	 * Executed during the `init` hook.
+	 * Executed during the `admin_init` hook.
 	 *
 	 * @return void
 	 */
-	public function init() {
+	public function admin_init() {
 		/**
 		 * Register instance for settings screen.
 		 *
@@ -90,7 +91,7 @@ class Plugin {
 		 * @var ModalRegister $modal
 		 */
 		$modal = $this->container->get( ModalRegister::class );
-		add_action( 'admin_init', array( $modal, 'register_modal' ) );
+		$modal->register_modal();
 	}
 }
 
