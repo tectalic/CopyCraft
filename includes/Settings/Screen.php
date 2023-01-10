@@ -29,6 +29,8 @@ class Screen {
 
 	/**
 	 * Render the settings section within the page.
+	 *
+	 * @return void
 	 */
 	public function render_section() {
 		echo '<p>' . sprintf(
@@ -43,6 +45,8 @@ class Screen {
 
 	/**
 	 * Render the settings field within the settings section.
+	 *
+	 * @return void
 	 */
 	public function render_field() {
 		$options = $this->data->get_settings();
@@ -53,6 +57,8 @@ class Screen {
 
 	/**
 	 * Render the settings page.
+	 *
+	 * @return void
 	 */
 	public function render_settings_page() {
 		?>

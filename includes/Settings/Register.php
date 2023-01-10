@@ -30,6 +30,8 @@ class Register {
 	/**
 	 * Register the settings screen and associated functionality.
 	 * Executed during the `admin_init` hook.
+	 *
+	 * @return void
 	 */
 	public function register_settings() {
 
@@ -69,6 +71,7 @@ class Register {
 	 * Sanitize the settings before they are saved to the database.
 	 *
 	 * @param array<string,string> $options The settings to be saved.
+	 * @return array<string,string> The sanitized settings.
 	 */
 	public function sanitize_callback( $options ) {
 		// Validate that the string is a valid OpenAI API key.
