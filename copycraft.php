@@ -49,7 +49,9 @@ class Plugin {
 				if ( Manager::isGlobal() ) {
 					return Manager::access();
 				}
-				$settings = ( $this->container->get( Data::class ) )->get_settings();
+				/** @var Data $settings */
+				$settings = $this->container->get( Data::class );
+				$settings = $settings->get_settings();
 
 				return Manager::build(
 					new HttpClient(),
@@ -77,6 +79,7 @@ class Plugin {
 		$settings = $this->container->get( Register::class );
 		add_action( 'admin_menu', array( $settings, 'register_settings' ) );
 
+		/** @var Modal $modal */
 		$modal = $this->container->get( Modal::class );
 		$modal->init();
 	}
