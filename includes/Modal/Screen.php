@@ -34,7 +34,7 @@ class Screen {
 	 * @return void
 	 */
 	public function add_form_button() {
-		echo '<a title="' . esc_html__( 'CopyCraft', 'copycraft' ) . '" class="button copycraft-open-modal-button">
+		echo '<a title="' . esc_attr__( 'CopyCraft', 'copycraft' ) . '" class="button copycraft-open-modal-button">
 			<span class="dashicons dashicons-superhero"></span> ' . esc_html__( 'CopyCraft', 'copycraft' ) . '</a>';
 	}
 
@@ -62,7 +62,7 @@ class Screen {
 	 */
 	public function admin_enqueue_scripts( $hook_suffix ) {
 		// Ensure we are on the add or edit product screens.
-		if ( in_array( $hook_suffix, array( 'post.php', 'post-new.php' ), true ) ) {
+		if ( ! in_array( $hook_suffix, array( 'post.php', 'post-new.php' ), true ) ) {
 			return;
 		}
 
@@ -140,10 +140,10 @@ class Screen {
 			$new_description = $this->generator->generate( $product );
 			echo '<textarea id="description" style="width: 100%; height: 300px;">' . esc_html( $new_description ) . '</textarea>';
 			echo '<div class="buttons">';
-			echo '<button id="replace" class="button button-primary button-large">' . esc_html__( 'Replace', 'copycraft' ) . '</button>';
-			echo '<button id="insert" class="button button-primary button-large">' . esc_html__( 'Insert', 'copycraft' ) . '</button>';
-			echo '<button id="refresh" class="button button-primary button-large">' . esc_html__( 'Try again', 'copycraft' ) . '</button>';
-			echo '<button id="discard" class="button button-primary button-large">' . esc_html__( 'Discard', 'copycraft' ) . '</button>';
+			echo '<button id="replace" class="button button-primary button-large" title="' . esc_attr__( 'Replace the existing description with this new one.', 'copycraft' ) . '">' . esc_html__( 'Replace', 'copycraft' ) . '</button>';
+			echo '<button id="insert" class="button button-primary button-large" title="' . esc_attr__( 'Append this new description to the existing description.', 'copycraft' ) . '">' . esc_html__( 'Insert', 'copycraft' ) . '</button>';
+			echo '<button id="refresh" class="button button-primary button-large" title="' . esc_attr__( 'Generate a new description.', 'copycraft' ) . '">' . esc_html__( 'Try again', 'copycraft' ) . '</button>';
+			echo '<button id="discard" class="button button-primary button-large" title="' . esc_attr__( 'Return to the Edit Produt screen.', 'copycraft' ) . '">' . esc_html__( 'Discard', 'copycraft' ) . '</button>';
 
 		} catch ( Exception $e ) {
 			// TODO: log this error instead of outputting it.
