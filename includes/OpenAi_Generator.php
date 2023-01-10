@@ -21,9 +21,9 @@ class OpenAi_Generator {
 
 	protected OpenAiClient $client;
 
-	public function __construct(Data $settings, OpenAiClient $client) {
+	public function __construct( Data $settings, OpenAiClient $client ) {
 		$this->settings = $settings;
-		$this->client = $client;
+		$this->client   = $client;
 	}
 
 	/**
@@ -47,46 +47,54 @@ class OpenAi_Generator {
 			// Moderate the prompt to ensure it's safe to use.
 			// The moderation result is cached to improve performance.
 			$key = 'copycraft_prompt_flagged_' . md5( $prompt );
-			if (false === ($flagged = get_transient($key))) {
+			if ( false === ( $flagged = get_transient( $key ) ) ) {
 				// Moderation result not cached.
 				// Moderate the prompt, and store the result flag in a transient.
 
 				/** @var ModerationsResponse $result */
 				$result = $this->client->moderations()->create(
-					new ModerationsRequest( [ 'input' => $prompt ] )
+					new ModerationsRequest( array( 'input' => $prompt ) )
 				)->toModel();
 
 				$flagged = (int) $result->results[0]->flagged;
-				set_transient($key, $flagged, DAY_IN_SECONDS);
+				set_transient( $key, $flagged, DAY_IN_SECONDS );
 			}
 
 			if ( $flagged ) {
 				throw new \Exception(
-					__( 'This product contains content that does not comply with OpenAI\'s content policy. Please edit the product description manually.',
-						'copycraft' )
+					__(
+						'This product contains content that does not comply with OpenAI\'s content policy. Please edit the product description manually.',
+						'copycraft'
+					)
 				);
 			}
 
 			// Generate the product description using the OpenAI completions API.
 			$completions = $this->client->completions();
 			/** @var CompletionsResponse $result */
-			$result = $completions->create( new CompletionsRequest( [
-				'model'       => 'text-davinci-003',
-				'prompt'      => $prompt,
-				'temperature' => 0.7,
-				'max_tokens'  => 2000,
-			] ) )->toModel();
+			$result         = $completions->create(
+				new CompletionsRequest(
+					array(
+						'model'       => 'text-davinci-003',
+						'prompt'      => $prompt,
+						'temperature' => 0.7,
+						'max_tokens'  => 2000,
+					)
+				)
+			)->toModel();
 			$newDescription = $result->choices[0]->text;
 
 			// Moderate the result.
 			$result = $this->client->moderations()->create(
-				new ModerationsRequest( [ 'input' => $newDescription ] )
+				new ModerationsRequest( array( 'input' => $newDescription ) )
 			)->toModel();
 
 			if ( $result->results[0]->flagged ) {
 				throw new \Exception(
-					__( 'This generated description contains content that does not comply with OpenAI\'s content policy. Please edit the product description manually.',
-						'copycraft' )
+					__(
+						'This generated description contains content that does not comply with OpenAI\'s content policy. Please edit the product description manually.',
+						'copycraft'
+					)
 				);
 			}
 
@@ -102,27 +110,27 @@ class OpenAi_Generator {
 		// TODO: Distinguish between short or long description (based on the button clicked).
 		$prompt = "Write a description for a product that has the following:\n\n";
 
-		$prompt .= "- Name: " . $product->get_name( 'edit' ) . "\n";
+		$prompt .= '- Name: ' . $product->get_name( 'edit' ) . "\n";
 
 		$cats = wc_get_product_category_list( $product->get_id() );
 		if ( strlen( $cats ) ) {
-			$prompt .= "- Categories: " . $this->clean_string( $cats ) . "\n";
+			$prompt .= '- Categories: ' . $this->clean_string( $cats ) . "\n";
 		}
 
 		if ( ! empty( $product->get_attributes() ) ) {
-			$prompt .= "- Attributes: ";
+			$prompt .= '- Attributes: ';
 			foreach ( $product->get_attributes() as $attribute ) {
-				$prompt .= $attribute->get_name() . ": " . implode( ', ', $attribute->get_options() ) . ". ";
+				$prompt .= $attribute->get_name() . ': ' . implode( ', ', $attribute->get_options() ) . '. ';
 			}
 			$prompt = rtrim( $prompt ) . "\n";
 		}
 
 		if ( strlen( $product->get_description( 'edit' ) > 0 ) ) {
-			$prompt .= "- Existing Description: " . $this->clean_string( $product->get_description( 'edit' ) ) . "\n";
+			$prompt .= '- Existing Description: ' . $this->clean_string( $product->get_description( 'edit' ) ) . "\n";
 		}
 
 		if ( strlen( $product->get_short_description( 'edit' ) ) > 0 ) {
-			$prompt .= "- Existing Short Description: " . $this->clean_string( $product->get_short_description( 'edit' ) ) . "\n";
+			$prompt .= '- Existing Short Description: ' . $this->clean_string( $product->get_short_description( 'edit' ) ) . "\n";
 		}
 
 		return $prompt;

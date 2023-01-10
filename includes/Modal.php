@@ -30,7 +30,7 @@ class Modal {
 	public function add_form_button() {
 		echo '<a title="' . __( 'CopyCraft', 'copycraft' ) . '" class="button copycraft-open-modal-button">
 			<span class="dashicons dashicons-superhero"></span> ' . __( 'CopyCraft', 'copycraft' ) .
-		     '</a>';
+			 '</a>';
 	}
 
 	public function add_modal_contents_element() {
@@ -51,14 +51,16 @@ class Modal {
 
 		$this->register_scripts();
 
-		wp_localize_script( 'copycraft', 'copycraft',
+		wp_localize_script(
+			'copycraft',
+			'copycraft',
 			array(
 				'ajaxurl' => admin_url( 'admin-ajax.php' ),
-				'loading' => __('Please wait ...', 'copycraft'),
+				'loading' => __( 'Please wait ...', 'copycraft' ),
 			)
 		);
 
-		wp_enqueue_script( 'copycraft');
+		wp_enqueue_script( 'copycraft' );
 
 	}
 
@@ -66,20 +68,23 @@ class Modal {
 	 * Register all scripts and stylesheets.
 	 */
 	protected function register_scripts() {
-		wp_register_script( 'copycraft',
+		wp_register_script(
+			'copycraft',
 			plugin_dir_url( __FILE__ ) . '../assets/js/copycraft.js',
 			array( 'jquery', 'thickbox' ),
-			rand( 1, 1000 ), // TODO: version number
+			rand( 1, 1000 ),
+			// TODO: version number
 			true
 		);
 		wp_register_style(
 			'copycraft',
 			plugins_url( '../assets/css/copycraft.css', __FILE__ ),
-			array('thickbox'),
-			rand( 1, 1000 ), // TODO: version number
+			array( 'thickbox' ),
+			rand( 1, 1000 ),
+			// TODO: version number
 		);
 
-		wp_enqueue_style('copycraft');
+		wp_enqueue_style( 'copycraft' );
 	}
 
 	/**
@@ -106,10 +111,10 @@ class Modal {
 			$newDescription = $this->generator->generate( $product );
 			echo '<textarea id="description" style="width: 100%; height: 300px;">' . $newDescription . '</textarea>';
 			echo '<div class="buttons">';
-			echo '<button id="replace" class="button button-primary button-large">' . esc_html__('Replace', 'copycraft') . '</button>';
-			echo '<button id="insert" class="button button-primary button-large">' . esc_html__('Insert', 'copycraft') . '</button>';
-			echo '<button id="refresh" class="button button-primary button-large">' . esc_html__('Try again', 'copycraft') . '</button>';
-			echo '<button id="discard" class="button button-primary button-large">' . esc_html__('Discard', 'copycraft') . '</button>';
+			echo '<button id="replace" class="button button-primary button-large">' . esc_html__( 'Replace', 'copycraft' ) . '</button>';
+			echo '<button id="insert" class="button button-primary button-large">' . esc_html__( 'Insert', 'copycraft' ) . '</button>';
+			echo '<button id="refresh" class="button button-primary button-large">' . esc_html__( 'Try again', 'copycraft' ) . '</button>';
+			echo '<button id="discard" class="button button-primary button-large">' . esc_html__( 'Discard', 'copycraft' ) . '</button>';
 
 		} catch ( Exception $e ) {
 			// TODO: log the error.
@@ -120,8 +125,8 @@ class Modal {
 		}
 	}
 
-	protected function error($errorMessage) {
-		die('<p class="error">' . $errorMessage . '</p>');
+	protected function error( $errorMessage ) {
+		die( '<p class="error">' . $errorMessage . '</p>' );
 	}
 
 }

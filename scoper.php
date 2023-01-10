@@ -1,7 +1,7 @@
 <?php
 
-return [
-	'patchers' => [
+return array(
+	'patchers' => array(
 		function ( string $filePath, string $prefix, string $content ): string {
 			// Ensure PHPdoc comments for Models are prefixed correctly.
 			if ( ! \str_contains( $filePath, 'vendor/tectalic/openai/' ) ) {
@@ -9,10 +9,10 @@ return [
 			}
 
 			return str_replace(
-				" \Tectalic\OpenAi\Models\\",
+				' \Tectalic\OpenAi\Models\\',
 				" \\$prefix\Tectalic\OpenAi\Models\\",
 				$content
 			);
 		},
-	]
-];
+	),
+);

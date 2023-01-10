@@ -43,17 +43,20 @@ class Plugin {
 	public function __construct() {
 		$this->container = new Container();
 
-		$this->container->add(Client::class, function () {
-			if (Manager::isGlobal()) {
-				return Manager::access();
-			}
-			$settings = ($this->container->get(Data::class))->get_settings();
+		$this->container->add(
+			Client::class,
+			function () {
+				if ( Manager::isGlobal() ) {
+					return Manager::access();
+				}
+				$settings = ( $this->container->get( Data::class ) )->get_settings();
 
-			return Manager::build(
-				new HttpClient(),
-				new Authentication( isset($settings['openai_api_key']) ? $settings['openai_api_key'] : '' )
-			);
-		});
+				return Manager::build(
+					new HttpClient(),
+					new Authentication( isset( $settings['openai_api_key'] ) ? $settings['openai_api_key'] : '' )
+				);
+			}
+		);
 
 		$this->container->delegate( new ReflectionContainer( true ) );
 		add_action( 'init', array( $this, 'init' ) );
@@ -74,7 +77,7 @@ class Plugin {
 		$settings = $this->container->get( Register::class );
 		add_action( 'admin_menu', array( $settings, 'register_settings' ) );
 
-		$modal = $this->container->get(Modal::class);
+		$modal = $this->container->get( Modal::class );
 		$modal->init();
 	}
 }
