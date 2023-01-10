@@ -8,3 +8,5 @@ parameters:
 	fileExtensions:
 		- php
 	level: max
+	bootstrapFiles:
+	    - %rootDir%/../../php-stubs/woocommerce-stubs/woocommerce-stubs.php

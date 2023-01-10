@@ -12,8 +12,9 @@
 
 namespace OM4\CopyCraft;
 
+use OM4\CopyCraft\Modal\Register as ModalRegister;
 use OM4\CopyCraft\Settings\Data;
-use OM4\CopyCraft\Settings\Register;
+use OM4\CopyCraft\Settings\Register as SettingsRegister;
 use OM4\CopyCraft\Vendor\Art4\Requests\Psr\HttpClient;
 use OM4\CopyCraft\Vendor\League\Container\Container;
 use OM4\CopyCraft\Vendor\League\Container\ReflectionContainer;
@@ -49,7 +50,11 @@ class Plugin {
 				if ( Manager::isGlobal() ) {
 					return Manager::access();
 				}
-				/** @var Data $settings */
+				/**
+				 * Settings instance.
+				 *
+				 * @var Data $settings
+				 */
 				$settings = $this->container->get( Data::class );
 				$settings = $settings->get_settings();
 
@@ -74,14 +79,18 @@ class Plugin {
 		/**
 		 * Register instance for settings screen.
 		 *
-		 * @var Register $settings
+		 * @var SettingsRegister $settings
 		 */
-		$settings = $this->container->get( Register::class );
+		$settings = $this->container->get( SettingsRegister::class );
 		add_action( 'admin_menu', array( $settings, 'register_settings' ) );
 
-		/** @var Modal $modal */
-		$modal = $this->container->get( Modal::class );
-		$modal->init();
+		/**
+		 * Register instance for modal screen.
+		 *
+		 * @var ModalRegister $modal
+		 */
+		$modal = $this->container->get( ModalRegister::class );
+		add_action( 'admin_init', array( $modal, 'register_modal' ) );
 	}
 }
 

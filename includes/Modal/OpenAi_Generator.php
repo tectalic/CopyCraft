@@ -1,6 +1,6 @@
 <?php
 
-namespace OM4\CopyCraft;
+namespace OM4\CopyCraft\Modal;
 
 use Exception;
 use OM4\CopyCraft\Settings\Data;
@@ -17,10 +17,26 @@ use WC_Product;
  */
 class OpenAi_Generator {
 
+	/**
+	 * Settings Data instance.
+	 *
+	 * @var Data
+	 */
 	protected Data $settings;
 
+	/**
+	 * OpenAI Client instance.
+	 *
+	 * @var OpenAiClient
+	 */
 	protected OpenAiClient $client;
 
+	/**
+	 * Constructor.
+	 *
+	 * @param Data         $settings Settings Data instance.
+	 * @param OpenAiClient $client OpenAI Client instance.
+	 */
 	public function __construct( Data $settings, OpenAiClient $client ) {
 		$this->settings = $settings;
 		$this->client   = $client;
@@ -32,12 +48,12 @@ class OpenAi_Generator {
 	 * @param WC_Product $product The WooCommerce product to generate a description for.
 	 *
 	 * @return string The generated product description.
-	 * @throws Exception
+	 * @throws Exception When an error occurs.
 	 */
 	public function generate( WC_Product $product ) {
 		$settings = $this->settings->get_settings();
 		if ( ! is_array( $settings ) || ! isset( $settings['openai_api_key'] ) ) {
-			throw new \Exception( __( 'Please enter your OpenAI API key in the CopyCraft settings.', 'copycraft' ) );
+			throw new Exception( __( 'Please enter your OpenAI API key in the CopyCraft settings.', 'copycraft' ) );
 		}
 
 		$prompt = $this->build_prompt( $product );
@@ -47,11 +63,16 @@ class OpenAi_Generator {
 			// Moderate the prompt to ensure it's safe to use.
 			// The moderation result is cached to improve performance.
 			$key = 'copycraft_prompt_flagged_' . md5( $prompt );
+			// phpcs:ignore WordPress.CodeAnalysis.AssignmentInCondition.Found, Squiz.PHP.DisallowMultipleAssignments.FoundInControlStructure
 			if ( false === ( $flagged = get_transient( $key ) ) ) {
 				// Moderation result not cached.
 				// Moderate the prompt, and store the result flag in a transient.
 
-				/** @var ModerationsResponse $result */
+				/**
+				 * The Moderations API Call Response model.
+				 *
+				 * @var ModerationsResponse $result
+				 */
 				$result = $this->client->moderations()->create(
 					new ModerationsRequest( array( 'input' => $prompt ) )
 				)->toModel();
@@ -61,7 +82,7 @@ class OpenAi_Generator {
 			}
 
 			if ( $flagged ) {
-				throw new \Exception(
+				throw new Exception(
 					__(
 						'This product contains content that does not comply with OpenAI\'s content policy. Please edit the product description manually.',
 						'copycraft'
@@ -71,8 +92,12 @@ class OpenAi_Generator {
 
 			// Generate the product description using the OpenAI completions API.
 			$completions = $this->client->completions();
-			/** @var CompletionsResponse $result */
-			$result         = $completions->create(
+			/**
+			 * The Completions API Call Response Model instance.
+			 *
+			 * @var CompletionsResponse $result
+			 */
+			$result          = $completions->create(
 				new CompletionsRequest(
 					array(
 						'model'       => 'text-davinci-003',
@@ -82,15 +107,21 @@ class OpenAi_Generator {
 					)
 				)
 			)->toModel();
-			$newDescription = $result->choices[0]->text;
+			$new_description = $result->choices[0]->text;
 
 			// Moderate the result.
+
+			/**
+			 * The Moderation API Call Response Model instance.
+			 *
+			 * @var ModerationsResponse $result
+			 */
 			$result = $this->client->moderations()->create(
-				new ModerationsRequest( array( 'input' => $newDescription ) )
+				new ModerationsRequest( array( 'input' => $new_description ) )
 			)->toModel();
 
 			if ( $result->results[0]->flagged ) {
-				throw new \Exception(
+				throw new Exception(
 					__(
 						'This generated description contains content that does not comply with OpenAI\'s content policy. Please edit the product description manually.',
 						'copycraft'
@@ -98,14 +129,23 @@ class OpenAi_Generator {
 				);
 			}
 
-			return $newDescription;
+			return $new_description;
 		} catch ( ClientException $e ) {
-			throw new \Exception( __( 'OpenAI API Error: ' . $e->getMessage(), 'copycraft' ), 0, $e );
+			// Translators: %s The error message returned by the OpenAI API.
+			throw new Exception( sprintf( __( 'OpenAI API Error: %s', 'copycraft' ), $e->getMessage() ), 0, $e );
 		} catch ( Exception $e ) {
-			throw new \Exception( __( 'An unexpected error occurred. Please try again.', 'copycraft' ), 0, $e );
+			throw new Exception( __( 'An unexpected error occurred. Please try again.', 'copycraft' ), 0, $e );
 		}
 	}
 
+	/**
+	 * Build the prompt to use for the OpenAI API.
+	 * This is the text that the API will use to generate the product description.
+	 *
+	 * @param WC_Product $product The WooCommerce Product.
+	 *
+	 * @return string
+	 */
 	protected function build_prompt( WC_Product $product ) {
 		// TODO: Distinguish between short or long description (based on the button clicked).
 		$prompt = "Write a description for a product that has the following:\n\n";
@@ -125,7 +165,7 @@ class OpenAi_Generator {
 			$prompt = rtrim( $prompt ) . "\n";
 		}
 
-		if ( strlen( $product->get_description( 'edit' ) > 0 ) ) {
+		if ( strlen( $product->get_description( 'edit' ) ) > 0 ) {
 			$prompt .= '- Existing Description: ' . $this->clean_string( $product->get_description( 'edit' ) ) . "\n";
 		}
 
@@ -136,7 +176,14 @@ class OpenAi_Generator {
 		return $prompt;
 	}
 
+	/**
+	 * Clean the string, removing all newlines and HTML characters.
+	 *
+	 * @param string $input Input string.
+	 *
+	 * @return string
+	 */
 	protected function clean_string( $input ) {
-		return trim( preg_replace( '/\s+/', ' ', strip_tags( $input ) ) );
+		return trim( (string) preg_replace( '/\s+/', ' ', wp_strip_all_tags( $input ) ) );
 	}
 }
