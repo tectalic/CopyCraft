@@ -42,20 +42,31 @@ class OpenAi_Generator {
 
 		try {
 			$client      = Manager::build( new HttpClient(), new Authentication( $key['openai_api_key'] ) );
-			$moderations = $client->moderations();
 
-			/** @var ModerationsResponse $result */
-			$result = $moderations->create(
-				new ModerationsRequest( [ 'input' => $prompt ] )
-			)->toModel();
+			// Moderate the prompt to ensure it's safe to use.
+			// The moderation result is cached to improve performance.
+			$key = 'copycraft_prompt_flagged_' . md5( $prompt );
+			if (false === ($flagged = get_transient($key))) {
+				// Moderation result not cached.
+				// Moderate the prompt, and store the result flag in a transient.
 
-			if ( $result->results[0]->flagged ) {
+				/** @var ModerationsResponse $result */
+				$result = $client->moderations()->create(
+					new ModerationsRequest( [ 'input' => $prompt ] )
+				)->toModel();
+
+				$flagged = (int) $result->results[0]->flagged;
+				set_transient($key, $flagged, DAY_IN_SECONDS);
+			}
+
+			if ( $flagged ) {
 				throw new \Exception(
 					__( 'This product contains content that does not comply with OpenAI\'s content policy. Please edit the product description manually.',
 						'copycraft' )
 				);
 			}
 
+			// Generate the product description using the OpenAI completions API.
 			$completions = $client->completions();
 			/** @var CompletionsResponse $result */
 			$result = $completions->create( new CompletionsRequest( [
@@ -64,10 +75,10 @@ class OpenAi_Generator {
 				'temperature' => 0.7,
 				'max_tokens'  => 2000,
 			] ) )->toModel();
-
 			$newDescription = $result->choices[0]->text;
 
-			$result = $moderations->create(
+			// Moderate the result.
+			$result = $client->moderations()->create(
 				new ModerationsRequest( [ 'input' => $newDescription ] )
 			)->toModel();
 
