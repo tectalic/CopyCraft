@@ -3,6 +3,7 @@
 .DS_Store
 .editorconfig
 .git
+.github
 .gitignore
 .wp-env.json
 *~

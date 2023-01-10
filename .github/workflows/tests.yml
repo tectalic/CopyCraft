@@ -42,7 +42,6 @@ jobs:
 
   e2e-tests:
     runs-on: ubuntu-latest
-    # NOTE: WordPress and WooCommerce versions can be configured in the .wp-env.json file
 
     name: E2E
 
