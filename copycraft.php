@@ -77,7 +77,7 @@ class Plugin {
 	 * @return void
 	 */
 	public function admin_init() {
-		if ( ! is_admin()) {
+		if ( ! is_admin() ) {
 			// Non wp-admin page.
 			return;
 		}
