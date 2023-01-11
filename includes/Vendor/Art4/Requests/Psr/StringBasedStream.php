@@ -8,7 +8,7 @@ namespace OM4\CopyCraft\Vendor\Art4\Requests\Psr;
 
 use OM4\CopyCraft\Vendor\Psr\Http\Message\StreamInterface;
 use RuntimeException;
-use OM4\CopyCraft\Vendor\WpOrg\Requests\Exception\InvalidArgument;
+use WpOrg\Requests\Exception\InvalidArgument;
 /**
  * PSR-7 StreamInterface implementation
  *

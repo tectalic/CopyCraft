@@ -7,7 +7,7 @@ declare (strict_types=1);
 namespace OM4\CopyCraft\Vendor\Art4\Requests\Psr;
 
 use OM4\CopyCraft\Vendor\Psr\Http\Message\RequestInterface;
-use OM4\CopyCraft\Vendor\WpOrg\Requests\Exception\InvalidArgument;
+use WpOrg\Requests\Exception\InvalidArgument;
 /**
  * PPSR-7 Message Header implementation
  */

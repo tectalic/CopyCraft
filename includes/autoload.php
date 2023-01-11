@@ -23,3 +23,23 @@ spl_autoload_register(
 		}
 	}
 );
+
+/**
+ * Load the `art4/requests-psr18-adapter` Requests v1 compatibility layer.
+ *
+ * This ensures the Art4/Requests HTTP Client can use the Requests v2 namespaced classes
+ * with WordPress core that bundle Requests v1 (WordPress 6.1 and older).
+ *
+ * WordPress' Requests library is located in `wp-includes/Requests/`.
+ *
+ * @see https://github.com/Art4/WP-Requests-PSR18-Adapter/pull/6
+ * @see https://core.trac.wordpress.org/ticket/54504
+ */
+if ( ! class_exists( 'WpOrg\Requests\Requests' ) && class_exists( 'Requests' ) ) {
+	class_alias( 'Requests', 'WpOrg\Requests\Requests' );
+	class_alias( 'Requests_Exception', 'WpOrg\Requests\Exception' );
+	class_alias( 'Requests_Exception_Transport', 'WpOrg\Requests\Exception\Transport' );
+	class_alias( 'Requests_IRI', 'WpOrg\Requests\Iri' );
+	class_alias( 'Requests_Response', 'WpOrg\Requests\Response' );
+	class_alias( 'Requests_Transport', 'WpOrg\Requests\Transport' );
+}

@@ -7,10 +7,10 @@ declare (strict_types=1);
 namespace OM4\CopyCraft\Vendor\Art4\Requests\Psr;
 
 use OM4\CopyCraft\Vendor\Psr\Http\Message\UriInterface;
-use OM4\CopyCraft\Vendor\WpOrg\Requests\Exception as RequestsException;
-use OM4\CopyCraft\Vendor\WpOrg\Requests\Exception\InvalidArgument;
-use OM4\CopyCraft\Vendor\WpOrg\Requests\Iri;
-use OM4\CopyCraft\Vendor\WpOrg\Requests\Port;
+use WpOrg\Requests\Exception as RequestsException;
+use WpOrg\Requests\Exception\InvalidArgument;
+use WpOrg\Requests\Iri;
+use WpOrg\Requests\Port;
 /**
  * Value object representing a URI.
  *

@@ -8,8 +8,8 @@ namespace OM4\CopyCraft\Vendor\Art4\Requests\Psr;
 
 use OM4\CopyCraft\Vendor\Psr\Http\Message\ResponseInterface;
 use OM4\CopyCraft\Vendor\Psr\Http\Message\StreamInterface;
-use OM4\CopyCraft\Vendor\WpOrg\Requests\Exception\InvalidArgument;
-use OM4\CopyCraft\Vendor\WpOrg\Requests\Response as RequestsResponse;
+use WpOrg\Requests\Exception\InvalidArgument;
+use WpOrg\Requests\Response as RequestsResponse;
 /**
  * PSR-7 ResponseInterface implementation
  *
