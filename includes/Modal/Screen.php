@@ -51,7 +51,7 @@ class Screen {
 	 * @return void
 	 */
 	public function add_modal_contents_element() {
-		echo '<div id="copycraft-modal" style="display: none;"><div id="copycraft-modal-contents" data-initialised="false"></div></div>';
+		echo '<div id="copycraft-modal" style="display: none;"><div id="copycraft-modal-contents"></div></div>';
 	}
 
 	/**
@@ -73,8 +73,9 @@ class Screen {
 			'copycraft',
 			'copycraft',
 			array(
-				'ajaxurl' => admin_url( 'admin-ajax.php' ),
+				'ajaxUrl' => admin_url( 'admin-ajax.php' ),
 				'loading' => __( 'Generating description, please wait ...', 'copycraft' ),
+				'events'  => null,
 			)
 		);
 
