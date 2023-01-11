@@ -190,7 +190,7 @@ final class CreateRequest extends AbstractModel
      *
      * Default Value: null
      *
-     * @var \Tectalic\OpenAi\Models\Completions\CreateRequestLogitBias|null
+     * @var \OM4\CopyCraft\Vendor\Tectalic\OpenAi\Models\Completions\CreateRequestLogitBias|null
      */
     public $logit_bias;
     /**

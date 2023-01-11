@@ -33,6 +33,6 @@ final class RetrieveResponse extends AbstractModel
     public $purpose;
     /** @var string */
     public $status;
-    /** @var \Tectalic\OpenAi\Models\Files\RetrieveResponseStatusDetails|null */
+    /** @var \OM4\CopyCraft\Vendor\Tectalic\OpenAi\Models\Files\RetrieveResponseStatusDetails|null */
     public $status_details;
 }

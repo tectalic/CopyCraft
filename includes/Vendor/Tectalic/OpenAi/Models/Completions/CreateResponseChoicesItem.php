@@ -17,7 +17,7 @@ final class CreateResponseChoicesItem extends AbstractModel
     public $text;
     /** @var int */
     public $index;
-    /** @var \Tectalic\OpenAi\Models\Completions\CreateResponseChoicesItemLogprobs|null */
+    /** @var \OM4\CopyCraft\Vendor\Tectalic\OpenAi\Models\Completions\CreateResponseChoicesItemLogprobs|null */
     public $logprobs;
     /** @var string */
     public $finish_reason;

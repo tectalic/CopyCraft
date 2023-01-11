@@ -35,14 +35,14 @@ final class CreateResponse extends AbstractModel
     public $organization_id;
     /** @var string */
     public $status;
-    /** @var \Tectalic\OpenAi\Models\FineTunes\CreateResponseHyperparams */
+    /** @var \OM4\CopyCraft\Vendor\Tectalic\OpenAi\Models\FineTunes\CreateResponseHyperparams */
     public $hyperparams;
-    /** @var \Tectalic\OpenAi\Models\FineTunes\CreateResponseTrainingFilesItem[] */
+    /** @var \OM4\CopyCraft\Vendor\Tectalic\OpenAi\Models\FineTunes\CreateResponseTrainingFilesItem[] */
     public $training_files;
-    /** @var \Tectalic\OpenAi\Models\FineTunes\CreateResponseValidationFilesItem[] */
+    /** @var \OM4\CopyCraft\Vendor\Tectalic\OpenAi\Models\FineTunes\CreateResponseValidationFilesItem[] */
     public $validation_files;
-    /** @var \Tectalic\OpenAi\Models\FineTunes\CreateResponseResultFilesItem[] */
+    /** @var \OM4\CopyCraft\Vendor\Tectalic\OpenAi\Models\FineTunes\CreateResponseResultFilesItem[] */
     public $result_files;
-    /** @var \Tectalic\OpenAi\Models\FineTunes\CreateResponseEventsItem[] */
+    /** @var \OM4\CopyCraft\Vendor\Tectalic\OpenAi\Models\FineTunes\CreateResponseEventsItem[] */
     public $events;
 }

@@ -12,9 +12,15 @@
 
 namespace OM4\CopyCraft;
 
-use OM4\CopyCraft\Settings\Register;
+use OM4\CopyCraft\Modal\Register as ModalRegister;
+use OM4\CopyCraft\Settings\Data;
+use OM4\CopyCraft\Settings\Register as SettingsRegister;
+use OM4\CopyCraft\Vendor\Art4\Requests\Psr\HttpClient;
 use OM4\CopyCraft\Vendor\League\Container\Container;
 use OM4\CopyCraft\Vendor\League\Container\ReflectionContainer;
+use OM4\CopyCraft\Vendor\Tectalic\OpenAi\Authentication;
+use OM4\CopyCraft\Vendor\Tectalic\OpenAi\Client;
+use OM4\CopyCraft\Vendor\Tectalic\OpenAi\Manager;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -37,8 +43,31 @@ class Plugin {
 	 */
 	public function __construct() {
 		$this->container = new Container();
+
+		$this->container->add(
+			Client::class,
+			function () {
+				if ( Manager::isGlobal() ) {
+					return Manager::access();
+				}
+				/**
+				 * Settings instance.
+				 *
+				 * @var Data $settings
+				 */
+				$settings = $this->container->get( Data::class );
+				$settings = $settings->get_settings();
+
+				return Manager::build(
+					new HttpClient(),
+					new Authentication( isset( $settings['openai_api_key'] ) ? $settings['openai_api_key'] : '' )
+				);
+			}
+		);
+
 		$this->container->delegate( new ReflectionContainer( true ) );
-		add_action( 'init', array( $this, 'init' ) );
+
+		add_action( 'init', array( $this, 'admin_init' ) );
 	}
 
 	/**
@@ -47,14 +76,27 @@ class Plugin {
 	 *
 	 * @return void
 	 */
-	public function init() {
+	public function admin_init() {
+		if ( ! is_admin() ) {
+			// Non wp-admin page.
+			return;
+		}
+
 		/**
 		 * Register instance for settings screen.
 		 *
-		 * @var Register $settings
+		 * @var SettingsRegister $settings
 		 */
-		$settings = $this->container->get( Register::class );
+		$settings = $this->container->get( SettingsRegister::class );
 		add_action( 'admin_menu', array( $settings, 'register_settings' ) );
+
+		/**
+		 * Register instance for modal screen.
+		 *
+		 * @var ModalRegister $modal
+		 */
+		$modal = $this->container->get( ModalRegister::class );
+		$modal->register_modal();
 	}
 }
 

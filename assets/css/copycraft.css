@@ -1,0 +1,20 @@
+/* Fix Thickbox width/height due to this bug: https://core.trac.wordpress.org/ticket/27473 */
+#TB_window {
+    width: 630px !important;
+    height: 420px !important;
+}
+
+#copycraft-modal-contents {
+    margin: 20px;
+}
+#copycraft-modal-contents .error {
+    color: #ff0000;
+}
+
+#copycraft-modal-contents div.buttons {
+    text-align: right;
+}
+
+#copycraft-modal-contents div.buttons button {
+    margin: 10px;
+}

@@ -33,6 +33,6 @@ final class ListResponseDataItemValidationFilesItem extends AbstractModel
     public $purpose;
     /** @var string */
     public $status;
-    /** @var \Tectalic\OpenAi\Models\FineTunes\ListResponseDataItemValidationFilesItemStatusDetails|null */
+    /** @var \OM4\CopyCraft\Vendor\Tectalic\OpenAi\Models\FineTunes\ListResponseDataItemValidationFilesItemStatusDetails|null */
     public $status_details;
 }

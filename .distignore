@@ -17,4 +17,5 @@ package-lock.json
 package.json
 phpcs.xml
 phpstan.neon
+scoper.php
 tests

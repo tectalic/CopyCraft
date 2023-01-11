@@ -21,8 +21,8 @@ final class CreateResponseResultsItem extends AbstractModel
     protected const REQUIRED = ['flagged', 'categories', 'category_scores'];
     /** @var bool */
     public $flagged;
-    /** @var \Tectalic\OpenAi\Models\Moderations\CreateResponseResultsItemCategories */
+    /** @var \OM4\CopyCraft\Vendor\Tectalic\OpenAi\Models\Moderations\CreateResponseResultsItemCategories */
     public $categories;
-    /** @var \Tectalic\OpenAi\Models\Moderations\CreateResponseResultsItemCategoryScores */
+    /** @var \OM4\CopyCraft\Vendor\Tectalic\OpenAi\Models\Moderations\CreateResponseResultsItemCategoryScores */
     public $category_scores;
 }

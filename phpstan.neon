@@ -8,3 +8,6 @@ parameters:
 	fileExtensions:
 		- php
 	level: max
+	bootstrapFiles:
+		- vendor/php-stubs/woocommerce-stubs/woocommerce-stubs.php
+		- vendor/php-stubs/woocommerce-stubs/woocommerce-packages-stubs.php

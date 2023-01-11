@@ -29,7 +29,7 @@ class Register {
 
 	/**
 	 * Register the settings screen and associated functionality.
-	 * Executed during the `admin_init` hook.
+	 * Executed during the `admin_menu` hook.
 	 *
 	 * @return void
 	 */

@@ -27,8 +27,8 @@ final class CreateResponse extends AbstractModel
     public $created;
     /** @var string */
     public $model;
-    /** @var \Tectalic\OpenAi\Models\Completions\CreateResponseChoicesItem[] */
+    /** @var \OM4\CopyCraft\Vendor\Tectalic\OpenAi\Models\Completions\CreateResponseChoicesItem[] */
     public $choices;
-    /** @var \Tectalic\OpenAi\Models\Completions\CreateResponseUsage */
+    /** @var \OM4\CopyCraft\Vendor\Tectalic\OpenAi\Models\Completions\CreateResponseUsage */
     public $usage;
 }

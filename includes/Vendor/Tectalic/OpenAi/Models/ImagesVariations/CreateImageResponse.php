@@ -21,6 +21,6 @@ final class CreateImageResponse extends AbstractModel
     protected const REQUIRED = ['created', 'data'];
     /** @var int */
     public $created;
-    /** @var \Tectalic\OpenAi\Models\ImagesVariations\CreateImageResponseDataItem[] */
+    /** @var \OM4\CopyCraft\Vendor\Tectalic\OpenAi\Models\ImagesVariations\CreateImageResponseDataItem[] */
     public $data;
 }

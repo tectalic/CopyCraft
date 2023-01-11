@@ -35,14 +35,14 @@ final class CancelFineTuneResponse extends AbstractModel
     public $organization_id;
     /** @var string */
     public $status;
-    /** @var \Tectalic\OpenAi\Models\FineTunesCancel\CancelFineTuneResponseHyperparams */
+    /** @var \OM4\CopyCraft\Vendor\Tectalic\OpenAi\Models\FineTunesCancel\CancelFineTuneResponseHyperparams */
     public $hyperparams;
-    /** @var \Tectalic\OpenAi\Models\FineTunesCancel\CancelFineTuneResponseTrainingFilesItem[] */
+    /** @var \OM4\CopyCraft\Vendor\Tectalic\OpenAi\Models\FineTunesCancel\CancelFineTuneResponseTrainingFilesItem[] */
     public $training_files;
-    /** @var \Tectalic\OpenAi\Models\FineTunesCancel\CancelFineTuneResponseValidationFilesItem[] */
+    /** @var \OM4\CopyCraft\Vendor\Tectalic\OpenAi\Models\FineTunesCancel\CancelFineTuneResponseValidationFilesItem[] */
     public $validation_files;
-    /** @var \Tectalic\OpenAi\Models\FineTunesCancel\CancelFineTuneResponseResultFilesItem[] */
+    /** @var \OM4\CopyCraft\Vendor\Tectalic\OpenAi\Models\FineTunesCancel\CancelFineTuneResponseResultFilesItem[] */
     public $result_files;
-    /** @var \Tectalic\OpenAi\Models\FineTunesCancel\CancelFineTuneResponseEventsItem[] */
+    /** @var \OM4\CopyCraft\Vendor\Tectalic\OpenAi\Models\FineTunesCancel\CancelFineTuneResponseEventsItem[] */
     public $events;
 }

@@ -17,7 +17,7 @@ final class CreateResponseChoicesItemLogprobs extends AbstractModel
     public $tokens;
     /** @var int[]|float[] */
     public $token_logprobs;
-    /** @var \Tectalic\OpenAi\Models\Completions\CreateResponseChoicesItemLogprobsTopLogprobsItem[] */
+    /** @var \OM4\CopyCraft\Vendor\Tectalic\OpenAi\Models\Completions\CreateResponseChoicesItemLogprobsTopLogprobsItem[] */
     public $top_logprobs;
     /** @var integer[] */
     public $text_offset;

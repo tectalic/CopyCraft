@@ -21,6 +21,6 @@ final class ListFineTuneResponse extends AbstractModel
     protected const REQUIRED = ['object', 'data'];
     /** @var string */
     public $object;
-    /** @var \Tectalic\OpenAi\Models\FineTunesEvents\ListFineTuneResponseDataItem[] */
+    /** @var \OM4\CopyCraft\Vendor\Tectalic\OpenAi\Models\FineTunesEvents\ListFineTuneResponseDataItem[] */
     public $data;
 }
