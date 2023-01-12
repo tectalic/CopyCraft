@@ -32,3 +32,18 @@ php-scoper add-prefix \
 mv "$current"/includes/Vendor/Psr/Http/Factory/* "$current"/includes/Vendor/Psr/Http/Message/
 rmdir "$current"/includes/Vendor/Psr/Http/Factory
 
+# Special handling of v1-compat inside art4/requests-psr18-adapter
+php-scoper add-prefix \
+  --no-config \
+  --force \
+  --quiet \
+  --output-dir="$current/includes/Vendor/WpOrg/Requests" \
+  --prefix="OM4\CopyCraft\Vendor" \
+  --working-dir="vendor/art4/requests-psr18-adapter/v1-compat"
+
+# remove autoload file
+rm "$current"/includes/Vendor/WpOrg/Requests/autoload.php
+
+# move Invalidargument to a PSR-4 autoladable location
+mkdir "$current"/includes/Vendor/WpOrg/Requests/Exception
+mv "$current"/includes/Vendor/WpOrg/Requests/InvalidArgument.php "$current"/includes/Vendor/WpOrg/Requests/Exception/InvalidArgument.php

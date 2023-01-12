@@ -9,7 +9,7 @@ namespace OM4\CopyCraft\Vendor\Art4\Requests\Psr;
 use OM4\CopyCraft\Vendor\Psr\Http\Message\RequestInterface;
 use OM4\CopyCraft\Vendor\Psr\Http\Message\StreamInterface;
 use OM4\CopyCraft\Vendor\Psr\Http\Message\UriInterface;
-use WpOrg\Requests\Exception\InvalidArgument;
+use OM4\CopyCraft\Vendor\WpOrg\Requests\Exception\InvalidArgument;
 /**
  * PSR-7 RequestInterface implementation
  *

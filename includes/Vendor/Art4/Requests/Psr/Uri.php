@@ -8,7 +8,7 @@ namespace OM4\CopyCraft\Vendor\Art4\Requests\Psr;
 
 use OM4\CopyCraft\Vendor\Psr\Http\Message\UriInterface;
 use WpOrg\Requests\Exception as RequestsException;
-use WpOrg\Requests\Exception\InvalidArgument;
+use OM4\CopyCraft\Vendor\WpOrg\Requests\Exception\InvalidArgument;
 use WpOrg\Requests\Iri;
 use WpOrg\Requests\Port;
 /**

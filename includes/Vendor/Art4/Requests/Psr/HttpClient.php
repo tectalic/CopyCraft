@@ -17,7 +17,7 @@ use OM4\CopyCraft\Vendor\Psr\Http\Message\StreamFactoryInterface;
 use OM4\CopyCraft\Vendor\Psr\Http\Message\StreamInterface;
 use OM4\CopyCraft\Vendor\Psr\Http\Message\UriInterface;
 use WpOrg\Requests\Exception;
-use WpOrg\Requests\Exception\InvalidArgument;
+use OM4\CopyCraft\Vendor\WpOrg\Requests\Exception\InvalidArgument;
 use WpOrg\Requests\Exception\Transport;
 use WpOrg\Requests\Iri;
 use WpOrg\Requests\Requests;
