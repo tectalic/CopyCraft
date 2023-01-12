@@ -10,7 +10,7 @@ namespace OM4\CopyCraft\Vendor\Art4\Requests\Exception\Psr;
 
 use OM4\CopyCraft\Vendor\Psr\Http\Client\RequestExceptionInterface;
 use OM4\CopyCraft\Vendor\Psr\Http\Message\RequestInterface;
-use OM4\CopyCraft\Vendor\WpOrg\Requests\Exception;
+use WpOrg\Requests\Exception;
 /**
  * Exception for when a request failed.
  *

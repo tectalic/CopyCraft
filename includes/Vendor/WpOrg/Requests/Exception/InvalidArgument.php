@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * @source https://github.com/WordPress/Requests/blob/v2.0.0/src/Exception/InvalidArgument.php
+ */
 namespace OM4\CopyCraft\Vendor\WpOrg\Requests\Exception;
 
 use InvalidArgumentException;

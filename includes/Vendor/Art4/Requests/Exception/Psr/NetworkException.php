@@ -10,8 +10,8 @@ namespace OM4\CopyCraft\Vendor\Art4\Requests\Exception\Psr;
 
 use OM4\CopyCraft\Vendor\Psr\Http\Client\NetworkExceptionInterface;
 use OM4\CopyCraft\Vendor\Psr\Http\Message\RequestInterface;
-use OM4\CopyCraft\Vendor\WpOrg\Requests\Exception;
-use OM4\CopyCraft\Vendor\WpOrg\Requests\Exception\Transport;
+use WpOrg\Requests\Exception;
+use WpOrg\Requests\Exception\Transport;
 /**
  * Network Exception
  *
