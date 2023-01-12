@@ -52,8 +52,8 @@ class OpenAi_Generator {
 	 */
 	public function generate( WC_Product $product ) {
 		$settings = $this->settings->get_settings();
-		if ( ! is_array( $settings ) || ! isset( $settings['openai_api_key'] ) ) {
-			throw new Exception( __( 'Please enter your OpenAI API key in the CopyCraft settings.', 'copycraft' ) );
+		if ( ! is_array( $settings ) || 0 === strlen( $settings['openai_api_key'] ) ) {
+			throw new Exception( __( 'Please enter your OpenAI API key in the CopyCraft settings and try again.', 'copycraft' ) );
 		}
 
 		$prompt = $this->build_prompt( $product );
