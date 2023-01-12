@@ -8,8 +8,6 @@ use OM4\CopyCraft\Vendor\Tectalic\OpenAi\Client as OpenAiClient;
 use OM4\CopyCraft\Vendor\Tectalic\OpenAi\ClientException;
 use OM4\CopyCraft\Vendor\Tectalic\OpenAi\Models\Completions\CreateRequest as CompletionsRequest;
 use OM4\CopyCraft\Vendor\Tectalic\OpenAi\Models\Moderations\CreateRequest as ModerationsRequest;
-use OM4\CopyCraft\Vendor\Tectalic\OpenAi\Models\Completions\CreateResponse as CompletionsResponse;
-use OM4\CopyCraft\Vendor\Tectalic\OpenAi\Models\Moderations\CreateResponse as ModerationsResponse;
 use WC_Product;
 
 /**
@@ -69,15 +67,15 @@ class OpenAi_Generator {
 				// Moderate the prompt, and store the result flag in a transient.
 
 				/**
-				 * The Moderations API Call Response model.
+				 * The Moderations API Call Response.
 				 *
-				 * @var ModerationsResponse $result
+				 * @var array $result
 				 */
 				$result = $this->client->moderations()->create(
 					new ModerationsRequest( array( 'input' => $prompt ) )
-				)->toModel();
+				)->toArray();
 
-				$flagged = (int) $result->results[0]->flagged;
+				$flagged = (int) $result['results'][0]['flagged'];
 				set_transient( $key, $flagged, DAY_IN_SECONDS );
 			}
 
@@ -93,9 +91,9 @@ class OpenAi_Generator {
 			// Generate the product description using the OpenAI completions API.
 			$completions = $this->client->completions();
 			/**
-			 * The Completions API Call Response Model instance.
+			 * The Completions API Call Response.
 			 *
-			 * @var CompletionsResponse $result
+			 * @var array $result
 			 */
 			$result          = $completions->create(
 				new CompletionsRequest(
@@ -106,21 +104,21 @@ class OpenAi_Generator {
 						'max_tokens'  => 2000,
 					)
 				)
-			)->toModel();
-			$new_description = $result->choices[0]->text;
+			)->toArray();
+			$new_description = $result['choices'][0]['text'];
 
 			// Moderate the result.
 
 			/**
-			 * The Moderation API Call Response Model instance.
+			 * The Moderation API Call Response.
 			 *
-			 * @var ModerationsResponse $result
+			 * @var array $result
 			 */
 			$result = $this->client->moderations()->create(
 				new ModerationsRequest( array( 'input' => $new_description ) )
-			)->toModel();
+			)->toArray();
 
-			if ( $result->results[0]->flagged ) {
+			if ( $result['results'][0]['flagged'] ) {
 				throw new Exception(
 					__(
 						'This generated description contains content that does not comply with OpenAI\'s content policy. Please edit the product description manually.',
