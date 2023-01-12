@@ -142,6 +142,7 @@ class Screen {
 			echo '<button id="refresh" class="button button-primary button-large" title="' . esc_attr__( 'Generate a new description.', 'copycraft' ) . '">' . esc_html__( 'Try again', 'copycraft' ) . '</button>';
 			echo '<button id="discard" class="button button-primary button-large" title="' . esc_attr__( 'Return to the Edit Produt screen.', 'copycraft' ) . '">' . esc_html__( 'Discard', 'copycraft' ) . '</button>';
 			echo '</div>';
+			exit;
 		} catch ( Exception $e ) {
 			$this->error( esc_html( $e->getMessage() ) );
 		}

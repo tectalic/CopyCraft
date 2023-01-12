@@ -46,7 +46,10 @@ class OpenAi_Generator {
 	 * @param WC_Product $product The WooCommerce product to generate a description for.
 	 *
 	 * @return string The generated product description.
-	 * @throws Exception When an error occurs.
+	 *
+	 * @throws ClientException Is converted to an Exception.
+	 * @throws Exception When no API key exists.
+	 * @throws Exception When an API or moderation error occurs.
 	 */
 	public function generate( WC_Product $product ) {
 		$settings = $this->settings->get_settings();
@@ -74,6 +77,9 @@ class OpenAi_Generator {
 				$result = $this->client->moderations()->create(
 					new ModerationsRequest( array( 'input' => $prompt ) )
 				)->toArray();
+				if ( array_key_exists( 'error', $result ) ) {
+					throw new ClientException( $result['error']['message'] );
+				}
 
 				$flagged = (int) $result['results'][0]['flagged'];
 				set_transient( $key, $flagged, DAY_IN_SECONDS );
@@ -95,7 +101,7 @@ class OpenAi_Generator {
 			 *
 			 * @var array $result
 			 */
-			$result          = $completions->create(
+			$result = $completions->create(
 				new CompletionsRequest(
 					array(
 						'model'       => 'text-davinci-003',
@@ -105,6 +111,9 @@ class OpenAi_Generator {
 					)
 				)
 			)->toArray();
+			if ( array_key_exists( 'error', $result ) ) {
+				throw new ClientException( $result['error']['message'] );
+			}
 			$new_description = $result['choices'][0]['text'];
 
 			// Moderate the result.
@@ -117,6 +126,9 @@ class OpenAi_Generator {
 			$result = $this->client->moderations()->create(
 				new ModerationsRequest( array( 'input' => $new_description ) )
 			)->toArray();
+			if ( array_key_exists( 'error', $result ) ) {
+				throw new ClientException( $result['error']['message'] );
+			}
 
 			if ( $result['results'][0]['flagged'] ) {
 				throw new Exception(
