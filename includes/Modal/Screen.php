@@ -109,7 +109,7 @@ class Screen {
 	}
 
 	/**
-	 * Output the HTML content that is displayed in the modal.
+	 * AJAX handler that outputs the HTML content that is then displayed in the modal.
 	 *
 	 * @return void
 	 */
@@ -141,13 +141,9 @@ class Screen {
 			echo '<button id="insert" class="button button-primary button-large" title="' . esc_attr__( 'Append this new description to the existing description.', 'copycraft' ) . '">' . esc_html__( 'Insert', 'copycraft' ) . '</button>';
 			echo '<button id="refresh" class="button button-primary button-large" title="' . esc_attr__( 'Generate a new description.', 'copycraft' ) . '">' . esc_html__( 'Try again', 'copycraft' ) . '</button>';
 			echo '<button id="discard" class="button button-primary button-large" title="' . esc_attr__( 'Return to the Edit Produt screen.', 'copycraft' ) . '">' . esc_html__( 'Discard', 'copycraft' ) . '</button>';
-
+			echo '</div>';
 		} catch ( Exception $e ) {
-			// TODO: log this error instead of outputting it.
-			echo '<pre>' . esc_html( $e->getMessage() ) . '</pre>';
-			$this->error( __( 'An unexpected error occurred. Please try again.', 'copycraft' ) );
-		} finally {
-			exit;
+			$this->error( esc_html( $e->getMessage() ) );
 		}
 	}
 
