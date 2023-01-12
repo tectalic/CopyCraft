@@ -7,6 +7,6 @@ describe('Plugins Screen', () => {
     expect.assertions(1);
 
     await visitAdminPage('plugins.php', 'plugin_status=active');
-    await expect(page).toMatchElement('tr[data-slug="copycraft"] .plugin-title strong', { text: 'CopyCraft' });
+    await expect(page).toElementEquals('tr[data-slug="copycraft"] .plugin-title strong', 'CopyCraft');
   });
 });

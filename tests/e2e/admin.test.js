@@ -6,6 +6,6 @@ describe('Store Owner', () => {
     expect.assertions(1);
 
     await visitAdminPage('/');
-    await expect(page).toMatchElement('#welcome-panel > div > div.welcome-panel-header > h2', 'Welcome to WordPress');
+    await expect(page).toElementEquals('#welcome-panel > div > div.welcome-panel-header > h2', 'Welcome to WordPress!');
   });
 });
