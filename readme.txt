@@ -5,7 +5,7 @@ Tags: WooCommerce, Product descriptions, Artificial intelligence, AI, Copywritin
 Requires at least: 5.9.0
 Tested up to: 6.1.0
 Requires PHP: 7.4
-Stable tag: 0.1.0
+Stable tag: 0.1.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -55,10 +55,16 @@ Currently, the plugin is only compatible with WooCommerce. However, we are consi
 
 == Changelog ==
 
+= 0.1.1 =
+* Public release for WordPress.org plugin repository.
+
 = 0.1 =
 * Initial release.
 
 == Upgrade Notice ==
+
+= 0.1.1 =
+* Public release for WordPress.org plugin repository.
 
 = 0.1 =
 Initial release.

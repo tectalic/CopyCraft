@@ -7,7 +7,7 @@
  * Author URI:      https://om4.io/
  * Text Domain:     copycraft
  * Domain Path:     /languages
- * Version:         0.1.0
+ * Version:         0.1.1
  */
 
 namespace OM4\CopyCraft;
