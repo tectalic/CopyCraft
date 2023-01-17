@@ -59,6 +59,9 @@ Currently, the plugin is only compatible with WooCommerce. However, we are consi
 
 == Changelog ==
 
+= 0.2 =
+* Add support for global store-wide product attributes.
+
 = 0.1.1 =
 * Public release for WordPress.org plugin repository.
 
@@ -66,6 +69,9 @@ Currently, the plugin is only compatible with WooCommerce. However, we are consi
 * Initial release.
 
 == Upgrade Notice ==
+
+= 0.2 =
+* Add support for global store-wide product attributes.
 
 = 0.1.1 =
 * Public release for WordPress.org plugin repository.
