@@ -9,6 +9,7 @@
 .vscode
 .wp-env.json
 *~
+/.wordpress-org
 /node_modules
 /vendor
 bin
