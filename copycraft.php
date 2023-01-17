@@ -7,7 +7,7 @@
  * Author URI:      https://tectalic.com/
  * Text Domain:     copycraft
  * Domain Path:     /languages
- * Version:         0.1.1
+ * Version:         0.2
  */
 
 namespace OM4\CopyCraft;
