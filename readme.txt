@@ -1,27 +1,27 @@
-=== CopyCraft: AI-Powered Copywriting and Content Generator ===
+=== CopyCraft: AI-Powered WooCommerce Product Descriptions Using OpenAI GPT-3 ===
 Contributors: jamescollins, om4csaba, OM4
 Donate link: http://copycraft.ai
-Tags: WooCommerce, Product descriptions, Artificial intelligence, AI, Copywriting, OpenAI
+Tags: WooCommerce, AI, OpenAI, GPT-3, Copywriting
 Requires at least: 5.9.0
 Tested up to: 6.1.0
 Requires PHP: 7.4
-Stable tag: 0.1.1
+Stable tag: 0.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-CopyCraft is an AI-powered WordPress plugin that helps you create accurate and compelling product descriptions for your WooCommerce products.
+Create compelling WooCommerce product descriptions using OpenAI GPT-3.
 
 == Description ==
 
-CopyCraft is designed to make the task of writing product descriptions easier and more efficient. It uses advanced AI algorithms to analyze your products and generate descriptions that are informative and engaging. With CopyCraft, you can save time and effort while still ensuring that your product descriptions are of the highest quality.
+CopyCraft is designed to make the task of writing WooCommerce product descriptions easier and more efficient. It uses advanced AI algorithms to analyze your products and generate descriptions that are informative and engaging. With CopyCraft, you can save time and effort while still ensuring that your product descriptions are of the highest quality.
 
 Uses OpenAI's GPT-3 API to generate product descriptions.
 
 Features:
 
 - AI-powered product description generator
-- Accurate and compelling descriptions
-- Easy to use interface
+- Generates compelling product descriptions
+- Easy to use interface - integrates with the WooCommerce Add Product or Edit Product screens
 - Works with WooCommerce
 
 Requires your own [OpenAI account](https://openai.com).
@@ -47,7 +47,11 @@ Yes, you will need your own OpenAI account and API key in order to use the plugi
 
 = Can I customize the generated product descriptions? =
 
-Yes, you can edit the generated descriptions to suit your needs. The plugin provides a convenient WYSIWYG editor for this purpose.
+Yes, you can edit the generated descriptions to suit your needs. The plugin integrates with the WooCommerce product editing screen for this purpose.
+
+= What AI Engine is Used? =
+
+OpenAI's GPT-3 API is used to generate the product descriptions. We also plan on supporting OpenAI's ChatGPT in the future.
 
 = Is the plugin compatible with other e-commerce platforms besides WooCommerce? =
 
