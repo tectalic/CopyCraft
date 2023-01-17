@@ -29,6 +29,7 @@
     }
   },
   "scripts": {
+    "makepot": "wp i18n make-pot . languages/copycraft.pot",
     "test:static": "vendor/bin/phpstan analyse --memory-limit=1G",
     "test:style": "vendor/bin/phpcs -p -s .",
     "test:style:fix": [
