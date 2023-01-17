@@ -169,8 +169,36 @@ class OpenAi_Generator {
 
 		if ( ! empty( $product->get_attributes() ) ) {
 			$prompt .= '- Attributes: ';
+
+			/**
+			 * Product Attributes can be store-wide or custom per-product attributes.
+			 *
+			 * Logic based on wc_display_product_attributes() function.
+			 *
+			 * @see wc_display_product_attributes()
+			 */
+
 			foreach ( $product->get_attributes() as $attribute ) {
-				$prompt .= $attribute->get_name() . ': ' . implode( ', ', $attribute->get_options() ) . '. ';
+				$attribute_name   = '';
+				$attribute_values = array();
+				if ( $attribute->is_taxonomy() ) {
+					// Storewide attribute.
+					$attribute_taxonomy = $attribute->get_taxonomy_object();
+					$attribute_name     = $attribute_taxonomy->attribute_label;
+					$values             = wc_get_product_terms( $product->get_id(), $attribute->get_name(), array( 'fields' => 'all' ) );
+					foreach ( $values as $attribute_value ) {
+						$attribute_values[] = esc_html( $attribute_value->name );
+					}
+				} else {
+					// Custom per-product attribute.
+					$attribute_name   = $attribute->get_name();
+					$attribute_values = $attribute->get_options();
+					foreach ( $attribute_values as &$value ) {
+						$value = esc_html( $value );
+					}
+				}
+
+				$prompt .= esc_html( $attribute_name ) . ': ' . implode( ', ', $attribute_values ) . '. ';
 			}
 			$prompt = rtrim( $prompt ) . "\n";
 		}
