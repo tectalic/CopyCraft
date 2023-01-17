@@ -2,9 +2,9 @@
 /**
  * Plugin Name:     CopyCraft
  * Plugin URI:      http://copycraft.ai
- * Description:     AI-powered accurate and compelling product descriptions for your WooCommerce products using OpenAI's GPT-3.
- * Author:          OM4 Software
- * Author URI:      https://om4.io/
+ * Description:     AI-powered compelling product descriptions for your WooCommerce products using OpenAI GPT-3.
+ * Author:          Tectalic
+ * Author URI:      https://tectalic.com/
  * Text Domain:     copycraft
  * Domain Path:     /languages
  * Version:         0.1.1
