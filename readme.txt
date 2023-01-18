@@ -53,6 +53,10 @@ Yes, you can edit the generated descriptions to suit your needs. The plugin inte
 
 OpenAI's GPT-3 API is used to generate the product descriptions. We also plan on supporting OpenAI's ChatGPT in the future.
 
+= I get an errror when attempting to generate a product description =
+
+An "An unexpected error occurred. Please try again." error message typically indicates that there is a temporary outage with OpenAI. You can keep an eye on OpenAI's service availability here: [https://status.openai.com](https://status.openai.com).
+
 = Is the plugin compatible with other e-commerce platforms besides WooCommerce? =
 
 Currently, the plugin is only compatible with WooCommerce. However, we are considering adding support for other platforms in the future.
