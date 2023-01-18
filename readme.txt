@@ -57,6 +57,16 @@ OpenAI's GPT-3 API is used to generate the product descriptions. We also plan on
 
 Currently, the plugin is only compatible with WooCommerce. However, we are considering adding support for other platforms in the future.
 
+= I found a bug. How can I contribute a patch or bug fix? =
+
+We'd love you to fork our [Github Repository](https://github.com/OM4/CopyCraft/) and send us a pull request.
+
+Alternatively, you can report a bug on our [Issue Tracker](https://github.com/OM4/CopyCraft/issues).
+
+= I have an idea or feature suggestion =
+
+Please [reach out to us here](https://github.com/OM4/CopyCraft/) and add your feature request.
+
 == Changelog ==
 
 = 0.2 =
