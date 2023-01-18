@@ -2,8 +2,8 @@
 Contributors: jamescollins, om4csaba, OM4
 Donate link: http://copycraft.ai
 Tags: WooCommerce, AI, OpenAI, GPT-3, Copywriting
-Requires at least: 5.9.0
-Tested up to: 6.1.0
+Requires at least: 5.9
+Tested up to: 6.1
 Requires PHP: 7.4
 Stable tag: 0.2
 License: GPLv2 or later
