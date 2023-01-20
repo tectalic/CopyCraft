@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name:     CopyCraft
- * Plugin URI:      http://copycraft.ai
+ * Plugin URI:      https://copycraft.ai
  * Description:     AI-powered compelling product descriptions for your WooCommerce products using OpenAI GPT-3.
  * Author:          Tectalic
  * Author URI:      https://tectalic.com/
