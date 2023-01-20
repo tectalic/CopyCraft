@@ -1,6 +1,6 @@
 === CopyCraft: AI-Powered WooCommerce Product Descriptions Using OpenAI GPT-3 ===
 Contributors: jamescollins, om4csaba, OM4
-Donate link: http://copycraft.ai
+Donate link: https://copycraft.ai
 Tags: WooCommerce, AI, OpenAI, GPT-3, Copywriting
 Requires at least: 5.9
 Tested up to: 6.1
