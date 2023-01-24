@@ -8,6 +8,8 @@
  * Text Domain:     copycraft
  * Domain Path:     /languages
  * Version:         0.2.1
+ * WC requires at least: 7.0
+ * WC tested up to: 7.3
  */
 
 namespace OM4\CopyCraft;
