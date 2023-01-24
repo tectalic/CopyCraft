@@ -5,7 +5,7 @@ Tags: WooCommerce, AI, OpenAI, GPT-3, Copywriting
 Requires at least: 5.9
 Tested up to: 6.1
 Requires PHP: 7.4
-Stable tag: 0.2
+Stable tag: 0.2.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -53,7 +53,7 @@ Yes, you can edit the generated descriptions to suit your needs. The plugin inte
 
 OpenAI's GPT-3 API is used to generate the product descriptions. We also plan on supporting OpenAI's ChatGPT in the future.
 
-= I get an errror when attempting to generate a product description =
+= I get an error when attempting to generate a product description =
 
 An "An unexpected error occurred. Please try again." error message typically indicates that there is a temporary outage with OpenAI. You can keep an eye on OpenAI's service availability here: [https://status.openai.com](https://status.openai.com).
 
@@ -73,6 +73,10 @@ Please [reach out to us here](https://github.com/OM4/CopyCraft/) and add your fe
 
 == Changelog ==
 
+= 0.2.1 =
+* Mark as compatible with WordPress 6.1.x.
+* Improve FAQs.
+
 = 0.2 =
 * Add support for global store-wide product attributes.
 
@@ -83,6 +87,9 @@ Please [reach out to us here](https://github.com/OM4/CopyCraft/) and add your fe
 * Initial release.
 
 == Upgrade Notice ==
+
+= 0.2.1 =
+* Compatibility with WordPress 6.1.x, improved FAQs.
 
 = 0.2 =
 * Add support for global store-wide product attributes.
