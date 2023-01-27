@@ -33,15 +33,21 @@ async function toHasElement (page, selector) {
 }
 
 /**
- * Expect an element text to equals the expected text.
+ * Expect an element text or value to equal the expected text.
  *
  * @param {*} selector The CSS selector for the element.
- * @param {*} expectedText The expected text.
+ * @param {*} expectedText The expected text or value.
  */
 async function toElementEquals (page, selector, expectedText) {
   const element = await getElement(page, selector);
   // Get the text from the element via Puppeteer
-  const elementText = await page.evaluate((el) => el.textContent, element);
+  let elementText = await (await element.getProperty('textContent')).jsonValue();
+  if (typeof elementText === 'undefined' || elementText === null || elementText === '') {
+    // No text for this element, get the value from the element via Puppeteer.
+    elementText = await (await element.getProperty('value')).jsonValue();
+  }
+  // Trim whitespace.
+  elementText = elementText.trim();
   if (elementText === expectedText) {
     return {
       message: () => `expected text for "${selector}" not to be equal to "${expectedText}"`,
