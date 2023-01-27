@@ -19,7 +19,7 @@ describe('Product Management', () => {
     // Verify new page saved.
     await expect(page).toElementEquals('#wpbody-content > div.wrap > h1', 'Edit product');
     await expect(page).toElementEquals('#title', 'Draft Product');
-    await expect(page).toIncludes('Product draft updated.');
+    await expect(page).toIncludeText('Product draft updated.');
   });
   it('Can create a new published product', async () => {
     expect.assertions(4);
@@ -33,7 +33,7 @@ describe('Product Management', () => {
     // Verify new page saved.
     await expect(page).toElementEquals('#wpbody-content > div.wrap > h1', 'Edit product');
     await expect(page).toElementEquals('#title', 'Published Product');
-    await expect(page).toIncludes('Product published.');
+    await expect(page).toIncludeText('Product published.');
   });
   it('Page load correctly', async () => {
     expect.assertions(3);
@@ -73,10 +73,10 @@ describe('Product Management', () => {
       '#copycraft-modal-contents p.error',
       'Please enter a product name and try again.'
     );
-    await expect(page).not.toHasElement('#replace');
-    await expect(page).not.toHasElement('#insert');
-    await expect(page).not.toHasElement('#refresh');
-    await expect(page).not.toHasElement('#discard');
+    await expect(page).not.toHaveElement('#replace');
+    await expect(page).not.toHaveElement('#insert');
+    await expect(page).not.toHaveElement('#refresh');
+    await expect(page).not.toHaveElement('#discard');
   });
   it('Modal displays and ajax request running', async () => {
     expect.assertions(2);

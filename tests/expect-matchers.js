@@ -12,12 +12,12 @@ async function getElement (page, selector) {
 }
 
 /**
- * Expect an element to exist.
+ * Expect an element to exist on the page.
  *
  * @param {*} selector
  * @returns
  */
-async function toHasElement (page, selector) {
+async function toHaveElement (page, selector) {
   const element = await page.$(selector);
   if (element !== null) {
     return {
@@ -33,7 +33,7 @@ async function toHasElement (page, selector) {
 }
 
 /**
- * Expect an element text or value to equal the expected text.
+ * Expect an element to exist with the specified text or value.
  *
  * @param {*} selector The CSS selector for the element.
  * @param {*} expectedText The expected text or value.
@@ -66,7 +66,7 @@ async function toElementEquals (page, selector, expectedText) {
  *
  * @param {*} expectedText The text to search for.
  */
-async function toIncludes (page, expectedText) {
+async function toIncludeText (page, expectedText) {
   // Get the page as text via Puppeteer.
   const pageText = await page.evaluate(() => document.documentElement.textContent);
   if (pageText.includes(expectedText)) {
@@ -102,6 +102,6 @@ async function toFillElement (page, selector, text) {
 module.exports = {
   toElementEquals,
   toFillElement,
-  toHasElement,
-  toIncludes
+  toHaveElement,
+  toIncludeText
 };
