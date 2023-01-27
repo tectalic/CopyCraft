@@ -50,12 +50,12 @@ async function toElementEquals (page, selector, expectedText) {
   elementText = elementText.trim();
   if (elementText === expectedText) {
     return {
-      message: () => `expected text for "${selector}" not to be equal to "${expectedText}"`,
+      message: () => `expected text for "${selector}" not to be equal to "${expectedText}".`,
       pass: true
     };
   } else {
     return {
-      message: () => `expected text for "${selector}" to be equal to "${expectedText}"`,
+      message: () => `expected text for "${selector}" to be equal to "${expectedText}". Found "${elementText}" instead.`,
       pass: false
     };
   }
@@ -83,19 +83,20 @@ async function toIncludes (page, expectedText) {
 }
 
 /**
- * Expect an element to be filled with the given text.
+ * Expect an input element to be filled with the given text.
  *
- * @param {*} page Puppeteer page object.
  * @param {*} selector The CSS selector for the element.
  * @param {*} text The text to fill the element with.
  */
 async function toFillElement (page, selector, text) {
   const element = await getElement(page, selector);
 
-  await element.press('Delete');
+  // Clear all input text as per https://evanhalley.dev/post/clearing-input-field-puppeteer/
+  await element.click({ clickCount: 3 });
+  await element.press('Backspace');
   await element.type(text);
 
-  await toElementEquals(page, selector, text);
+  return await toElementEquals(page, selector, text);
 }
 
 module.exports = {

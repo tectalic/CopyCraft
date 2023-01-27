@@ -22,7 +22,7 @@ describe('Product Management', () => {
     await expect(page).toIncludes('Product draft updated.');
   });
   it('Can create a new published product', async () => {
-    expect.assertions(5);
+    expect.assertions(4);
 
     // Enter a Product Title
     await expect(page).toFillElement('#title', 'Published Product');
@@ -33,8 +33,7 @@ describe('Product Management', () => {
     // Verify new page saved.
     await expect(page).toElementEquals('#wpbody-content > div.wrap > h1', 'Edit product');
     await expect(page).toElementEquals('#title', 'Published Product');
-    await expect(page).toIncludes('Product draft updated.');
-    await expect(page).toMatch('Product published.');
+    await expect(page).toIncludes('Product published.');
   });
   it('Page load correctly', async () => {
     expect.assertions(3);
@@ -119,7 +118,7 @@ describe('Product Management', () => {
     await page.waitForSelector('#copycraft-modal-contents p.error');
     await expect(page).toElementEquals(
       '#copycraft-modal-contents p.error',
-      'Please enter a product name and try agadadsvavdssain.'
+      'Please enter your OpenAI API key in the CopyCraft settings and try again.'
     );
   });
 });
