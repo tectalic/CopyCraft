@@ -95,4 +95,4 @@ We use the following tools to write e2e tests:
 - Use WordPress' [E2E Test Utils](https://www.npmjs.com/package/@wordpress/e2e-test-utils) API, to navigate between pages. It is pre-configured to work seamlessly with `wp-env`.
 - Use [Puppeteer](https://github.com/GoogleChrome/puppeteer) directly interact with the page.
 
-Note: Do not use [expect-puppeteer](https://github.com/smooth-code/jest-puppeteer/tree/master/packages/expect-puppeteer) API. The time of writing appears to be broken, even with `puppeteer@17` installed.
+Note: Do not use [expect-puppeteer API](https://github.com/smooth-code/jest-puppeteer/blob/master/packages/expect-puppeteer/README.md#api). At the time of writing appears to be broken, even with `puppeteer@17` installed. Instead, use the matchers provided in `tests/expect-matchers.js` instead.
