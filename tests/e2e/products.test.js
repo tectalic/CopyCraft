@@ -11,35 +11,35 @@ describe('Product Management', () => {
     expect.assertions(4);
 
     // Enter a Product Title
-    await expect(page).toFill('#title', 'Draft Product');
+    await expect(page).toFillElement('#title', 'Draft Product');
     // Click "Save Draft" button.
     await page.evaluate((selector) => document.querySelector(selector).click(), '#save-post');
     // Wait for page to reload.
     await page.waitForNavigation({ waitUntil: 'load' });
     // Verify new page saved.
-    await expect(page).toMatchElement('#wpbody-content > div.wrap > h1', 'Edit product');
-    await expect(page).toMatchElement('#title', 'Draft Product');
-    await expect(page).toMatch('Product draft updated.');
+    await expect(page).toElementEquals('#wpbody-content > div.wrap > h1', 'Edit product');
+    await expect(page).toElementEquals('#title', 'Draft Product');
+    await expect(page).toIncludeText('Product draft updated.');
   });
   it('Can create a new published product', async () => {
     expect.assertions(4);
 
     // Enter a Product Title
-    await expect(page).toFill('#title', 'Published Product');
+    await expect(page).toFillElement('#title', 'Published Product');
     // Click "Publish" button.
     await page.evaluate((selector) => document.querySelector(selector).click(), '#publish');
     // Wait for page to reload.
     await page.waitForNavigation({ waitUntil: 'load' });
     // Verify new page saved.
-    await expect(page).toMatchElement('#wpbody-content > div.wrap > h1', 'Edit product');
-    await expect(page).toMatchElement('#title', 'Published Product');
-    await expect(page).toMatch('Product published.');
+    await expect(page).toElementEquals('#wpbody-content > div.wrap > h1', 'Edit product');
+    await expect(page).toElementEquals('#title', 'Published Product');
+    await expect(page).toIncludeText('Product published.');
   });
   it('Page load correctly', async () => {
     expect.assertions(3);
 
     // Make sure "CopyCraft" button exist on the page.
-    await expect(page).toMatchElement('#wp-content-wrap .copycraft-open-modal-button', 'CopyCraft');
+    await expect(page).toElementEquals('#wp-content-wrap .copycraft-open-modal-button', 'CopyCraft');
 
     // Click "CopyCraft" button in the main description editor.
     await page.evaluate(
@@ -51,9 +51,9 @@ describe('Product Management', () => {
     await page.waitForSelector('#TB_window');
 
     // Modal Title.
-    await expect(page).toMatchElement('#TB_window #TB_ajaxWindowTitle', 'CopyCraft');
+    await expect(page).toElementEquals('#TB_window #TB_ajaxWindowTitle', 'CopyCraft');
     // Loading message displays while AJAX call is made.
-    await expect(page).toMatchElement('#copycraft-modal-contents p.loading', 'Generating description, please wait ...');
+    await expect(page).toElementEquals('#copycraft-modal-contents p.loading', 'Generating description, please wait ...');
   });
   it('Modal displays error message when adding an empty new product', async () => {
     expect.assertions(5);
@@ -69,20 +69,20 @@ describe('Product Management', () => {
 
     // Verify error message is shown and buttons are not shown.
     await page.waitForSelector('#copycraft-modal-contents p.error');
-    await expect(page).toMatchElement(
+    await expect(page).toElementEquals(
       '#copycraft-modal-contents p.error',
       'Please enter a product name and try again.'
     );
-    await expect(page).not.toMatchElement('#replace');
-    await expect(page).not.toMatchElement('#insert');
-    await expect(page).not.toMatchElement('#refresh');
-    await expect(page).not.toMatchElement('#discard');
+    await expect(page).not.toHaveElement('#replace');
+    await expect(page).not.toHaveElement('#insert');
+    await expect(page).not.toHaveElement('#refresh');
+    await expect(page).not.toHaveElement('#discard');
   });
   it('Modal displays and ajax request running', async () => {
     expect.assertions(2);
 
     // Enter a Product Title
-    await expect(page).toFill('#title', 'A new Product');
+    await expect(page).toFillElement('#title', 'A new Product');
     // Click "CopyCraft" button in the main description editor.
     await page.evaluate(
       (selector) => document.querySelector(selector).click(),
@@ -104,7 +104,7 @@ describe('Product Management', () => {
     expect.assertions(2);
 
     // Enter a Product Title
-    await expect(page).toFill('#title', 'A new Product');
+    await expect(page).toFillElement('#title', 'A new Product');
     // Click "CopyCraft" button in the main description editor.
     await page.evaluate(
       (selector) => document.querySelector(selector).click(),
@@ -116,9 +116,9 @@ describe('Product Management', () => {
 
     // Verify error message is shown and buttons are not shown.
     await page.waitForSelector('#copycraft-modal-contents p.error');
-    await expect(page).toMatchElement(
+    await expect(page).toElementEquals(
       '#copycraft-modal-contents p.error',
-      'Please enter a product name and try agadadsvavdssain.'
+      'Please enter your OpenAI API key in the CopyCraft settings and try again.'
     );
   });
 });
