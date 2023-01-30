@@ -42,7 +42,7 @@ async function toElementEquals (page, selector, expectedText) {
   const element = await getElement(page, selector);
   // Get the text from the element via Puppeteer
   let elementText = await (await element.getProperty('textContent')).jsonValue();
-  if (typeof elementText === 'undefined' || elementText === null || elementText === '') {
+  if (!elementText) {
     // No text for this element, get the value from the element via Puppeteer.
     elementText = await (await element.getProperty('value')).jsonValue();
   }
