@@ -70,6 +70,20 @@ class Plugin {
 		$this->container->delegate( new ReflectionContainer( true ) );
 
 		add_action( 'init', array( $this, 'admin_init' ) );
+
+		/**
+		 * Declare compatibility with WooCommerce High-Performance Order Storage (HPOS).
+		 *
+		 * @link https://github.com/woocommerce/woocommerce/wiki/High-Performance-Order-Storage-Upgrade-Recipe-Book
+		 */
+		add_action(
+			'before_woocommerce_init',
+			function() {
+				if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
+					\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', __FILE__, true );
+				}
+			}
+		);
 	}
 
 	/**
